@@ -1,0 +1,1444 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Make Aid Possible | Sustainable Development at Scale</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+/* ── RESET & VARS ─────────────────────────── */
+:root{--red:#C8102E;--rdk:#9E0B24;--blk:#0D0D0D;--wht:#fff;--g50:#F9F9F9;--g100:#F2F2F2;--g200:#E4E4E4;--g500:#777;--tx:#1A1A1A;--txm:#5a5a5a;}
+*{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth}
+body{font-family:'Inter',sans-serif;color:var(--tx);background:#fff;overflow-x:hidden}
+a{text-decoration:none;color:inherit}img{display:block;max-width:100%}
+
+/* ── HEADER ───────────────────────────────── */
+.hdr{background:var(--blk);border-radius:0 0 22px 22px;padding:13px 20px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:1000;box-shadow:0 4px 24px rgba(0,0,0,.45)}
+.logo-wrap{display:flex;align-items:center;gap:10px;cursor:pointer}
+.logo-mark{width:46px;height:46px;background:var(--red);border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.logo-mark svg{width:26px;height:26px;fill:#fff}
+.logo-txt{color:#fff;font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.07em;line-height:1.25}
+.burger{background:none;border:none;cursor:pointer;display:flex;flex-direction:column;gap:5px;padding:4px}
+.burger span{display:block;width:24px;height:2px;background:#fff;border-radius:2px}
+
+/* ── NAV DRAWER ───────────────────────────── */
+.nav{display:none;position:fixed;inset:0;z-index:1100;flex-direction:column}
+.nav.open{display:flex}
+.nav-top{background:var(--blk);border-radius:0 0 22px 22px;padding:13px 20px;display:flex;align-items:center;justify-content:space-between}
+.nav-x{background:none;border:none;color:#fff;font-size:30px;cursor:pointer;line-height:1;font-weight:300}
+.nav-links{background:var(--red);flex:1;overflow-y:auto;padding:4px 0}
+.nav-links a{display:flex;align-items:center;justify-content:space-between;padding:17px 28px;color:#fff;font-size:18px;font-weight:400;border-bottom:1px solid rgba(255,255,255,.12);cursor:pointer}
+.nav-links a:active{background:rgba(0,0,0,.15)}
+.nav-cta{padding:18px 24px;background:var(--red)}
+.nav-cta a{display:block;background:#fff;color:var(--red);border-radius:8px;padding:14px;text-align:center;font-weight:800;font-size:16px;cursor:pointer}
+
+/* ── TICKER ───────────────────────────────── */
+.ticker{background:var(--red);padding:10px 0;overflow:hidden;white-space:nowrap}
+.ticker-t{display:inline-flex;animation:tick 35s linear infinite}
+.ticker-t:hover{animation-play-state:paused}
+.ticker-s{display:inline-block;font-size:13px;font-weight:600;letter-spacing:.03em;color:#fff;padding-right:80px}
+@keyframes tick{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* ── PAGE SYSTEM ──────────────────────────── */
+.pg{display:none}.pg.active{display:block}
+
+/* ── HERO ─────────────────────────────────── */
+.hero{position:relative;min-height:580px;display:flex;flex-direction:column;justify-content:flex-end;padding:70px 22px 38px;overflow:hidden}
+.hero-bg{position:absolute;inset:0;background-size:cover;background-position:center top}
+.hero-ov{position:absolute;inset:0;background:linear-gradient(168deg,rgba(8,1,3,.86) 0%,rgba(110,8,22,.72) 52%,rgba(200,16,46,.5) 100%)}
+.hero>*:not(.hero-bg):not(.hero-ov){position:relative;z-index:1}
+.eyebrow{color:rgba(255,255,255,.6);font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.18em;margin-bottom:14px}
+.hero h1{font-family:'Playfair Display',serif;font-size:34px;color:#fff;line-height:1.17;margin-bottom:18px}
+.hero-p{color:rgba(255,255,255,.82);font-size:15px;line-height:1.68;margin-bottom:30px}
+.hbtns{display:flex;gap:12px;flex-wrap:wrap}
+
+/* ── BUTTONS ──────────────────────────────── */
+.br{display:inline-block;background:var(--red);color:#fff;border:none;border-radius:50px;padding:14px 28px;font-size:15px;font-weight:700;cursor:pointer;font-family:'Inter',sans-serif;transition:background .2s,transform .15s}
+.br:hover{background:var(--rdk);transform:translateY(-1px)}
+.bo{display:inline-block;background:transparent;color:#fff;border:2px solid rgba(255,255,255,.5);border-radius:50px;padding:12px 24px;font-size:15px;font-weight:600;cursor:pointer;font-family:'Inter',sans-serif;transition:border-color .2s}
+.bo:hover{border-color:#fff}
+.brb{display:block;width:100%;background:var(--red);color:#fff;border:none;border-radius:10px;padding:15px;text-align:center;font-size:15px;font-weight:700;cursor:pointer;font-family:'Inter',sans-serif;margin-bottom:10px;transition:background .2s}
+.brb:hover{background:var(--rdk)}
+.bgr{display:block;width:100%;background:transparent;color:var(--red);border:1.5px solid var(--g200);border-radius:10px;padding:14px;text-align:center;font-size:15px;font-weight:600;cursor:pointer;font-family:'Inter',sans-serif;transition:border-color .2s}
+.bgr:hover{border-color:var(--red)}
+.bw{display:inline-block;background:#fff;color:var(--blk);border-radius:10px;padding:15px 34px;font-size:15px;font-weight:700;cursor:pointer;font-family:'Inter',sans-serif;transition:transform .15s}
+.bw:hover{transform:translateY(-1px)}
+.brp{display:inline-block;background:var(--red);color:#fff;border-radius:50px;padding:14px 32px;font-size:15px;font-weight:700;cursor:pointer;font-family:'Inter',sans-serif;transition:background .2s}
+.brp:hover{background:var(--rdk)}
+.brow{display:inline-block;background:transparent;color:#fff;border:2px solid rgba(255,255,255,.5);border-radius:50px;padding:12px 24px;font-size:15px;font-weight:600;cursor:pointer;font-family:'Inter',sans-serif;transition:border-color .2s}
+.brow:hover{border-color:#fff}
+
+/* ── QUICK PILLS ──────────────────────────── */
+.qpills{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;padding:18px 14px;background:linear-gradient(to bottom,rgba(8,1,3,.88) 0%,#fff 45%)}
+.qp{background:#fff;border-radius:20px;padding:18px 10px;text-align:center;box-shadow:0 3px 16px rgba(0,0,0,.09);cursor:pointer;transition:transform .2s,box-shadow .2s;color:var(--tx)}
+.qp:hover{transform:translateY(-3px);box-shadow:0 8px 24px rgba(0,0,0,.14)}
+.qpi{width:48px;height:48px;background:var(--red);border-radius:14px;display:flex;align-items:center;justify-content:center;margin:0 auto 10px}
+.qpi svg{width:24px;height:24px;fill:#fff}
+.qp span{font-size:12px;font-weight:700;line-height:1.3;display:block}
+
+/* ── EMAIL CAPTURE ────────────────────────── */
+.ecap{background:var(--blk);padding:32px 22px;text-align:center}
+.ecap h2{color:var(--red);font-size:22px;font-weight:900;text-transform:uppercase;letter-spacing:.1em;margin-bottom:16px}
+.ecap input{width:100%;padding:14px 16px;border-radius:8px;border:none;font-size:15px;margin-bottom:12px;font-family:'Inter',sans-serif;outline:none}
+.ecap button{width:100%;background:var(--red);color:#fff;border:none;border-radius:8px;padding:15px;font-size:16px;font-weight:700;cursor:pointer;font-family:'Inter',sans-serif}
+
+/* ── LABELS / TITLES ──────────────────────── */
+.sl{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.14em;color:var(--red);margin-bottom:8px}
+.st{font-size:27px;font-weight:800;line-height:1.22;margin-bottom:10px;color:var(--blk)}
+.ss{font-size:15px;color:var(--txm);line-height:1.7;margin-bottom:24px}
+
+/* ── SECTION WRAPPERS ─────────────────────── */
+.sec{padding:44px 20px;background:#fff}
+.sec-gray{padding:40px 20px;background:var(--g50)}
+.sec-blk{padding:44px 22px;background:var(--blk)}
+.sec-red{padding:36px 20px;background:var(--red)}
+
+/* ── STAT GRID ────────────────────────────── */
+.sgrid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:20px}
+.scard{background:#fff;border:1px solid var(--g200);border-radius:18px;padding:20px 16px;box-shadow:0 2px 14px rgba(0,0,0,.06)}
+.sico{width:52px;height:52px;background:var(--red);border-radius:50%;display:flex;align-items:center;justify-content:center;margin-bottom:12px}
+.sico svg{width:26px;height:26px;fill:#fff}
+.scard p{font-size:14px;line-height:1.55}
+.scard strong{font-weight:800;font-size:15px}
+
+/* ── YOUTUBE ──────────────────────────────── */
+.yt{border-radius:18px;overflow:hidden;position:relative;aspect-ratio:16/9;cursor:pointer;background:#000;margin:20px 0}
+.yt iframe{width:100%;height:100%;border:none;display:block}
+.yt-th{position:relative;width:100%;height:100%}
+.yt-th img{width:100%;height:100%;object-fit:cover;display:block}
+.yt-pb{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,.25)}
+.yt-pc{width:72px;height:72px;background:rgba(255,255,255,.94);border-radius:50%;display:flex;align-items:center;justify-content:center;transition:transform .2s}
+.yt-th:hover .yt-pc{transform:scale(1.08)}
+.yt-pc svg{width:30px;height:30px;fill:var(--red);margin-left:5px}
+.yt-lbl{position:absolute;bottom:14px;left:14px;color:#fff;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;text-shadow:0 1px 6px rgba(0,0,0,.7)}
+
+/* ── CAUSE CARDS ──────────────────────────── */
+.ccard{background:#fff;border:1px solid var(--g200);border-radius:18px;overflow:hidden;margin-bottom:18px;box-shadow:0 2px 14px rgba(0,0,0,.06);transition:transform .2s}
+.ccard:hover{transform:translateY(-2px)}
+.cimg{position:relative;width:100%;height:200px;overflow:hidden}
+.cimg img{width:100%;height:100%;object-fit:cover}
+.cov{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.8) 0%,rgba(0,0,0,.06) 60%);display:flex;align-items:flex-end;padding:16px}
+.clbl{color:#fff;font-size:18px;font-weight:900;text-transform:uppercase;line-height:1.2}
+.clbl span{display:block;font-size:12px;font-weight:400;text-transform:none;opacity:.85;margin-top:2px}
+.cbody{padding:18px}
+.cbody h3{font-size:20px;font-weight:800;margin-bottom:8px}
+.cbody p{font-size:14px;color:var(--txm);margin-bottom:18px;line-height:1.65}
+
+/* ── REGION CARDS (Where We Work) ─────────── */
+.rcard{border-radius:18px;overflow:hidden;margin-bottom:16px;box-shadow:0 2px 14px rgba(0,0,0,.08);position:relative}
+.rcard img{width:100%;height:220px;object-fit:cover;display:block}
+.rov{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.82) 0%,rgba(0,0,0,.08) 55%);display:flex;flex-direction:column;justify-content:flex-end;padding:20px}
+.rov h3{color:#fff;font-size:20px;font-weight:800;margin-bottom:6px}
+.rov p{color:rgba(255,255,255,.82);font-size:13px;line-height:1.6}
+
+/* ── SERVICE LIST ─────────────────────────── */
+.svcard{background:#fff;border:1px solid var(--g200);border-radius:18px;padding:20px;margin-bottom:12px;display:flex;align-items:flex-start;gap:16px;box-shadow:0 2px 12px rgba(0,0,0,.05)}
+.svico{width:54px;height:54px;background:var(--red);border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.svico svg{width:26px;height:26px;fill:#fff}
+.svcard h4{font-size:16px;font-weight:800;margin-bottom:5px}
+.svcard p{font-size:14px;color:var(--txm);line-height:1.6}
+
+/* ── FLAGSHIP ─────────────────────────────── */
+.flcard{border-radius:18px;overflow:hidden;margin-bottom:16px;position:relative;box-shadow:0 2px 14px rgba(0,0,0,.08)}
+.flcard img{width:100%;height:210px;object-fit:cover;display:block}
+.flov{position:absolute;bottom:0;left:0;right:0;background:linear-gradient(to top,rgba(0,0,0,.88) 0%,transparent 100%);padding:22px 18px 18px}
+.flov h4{color:#fff;font-size:18px;font-weight:800;margin-bottom:4px}
+.flov p{color:rgba(255,255,255,.82);font-size:13px;line-height:1.55}
+
+/* ── MV CARDS ─────────────────────────────── */
+.mvcard{background:#fff;border-radius:18px;padding:24px;margin-bottom:14px;border-left:4px solid var(--red);box-shadow:0 2px 12px rgba(0,0,0,.06)}
+.mvcard h3{font-size:17px;font-weight:800;margin-bottom:10px;color:var(--red)}
+.mvcard p{font-size:15px;line-height:1.72;color:var(--txm)}
+
+/* ── APPROACH CARDS ───────────────────────── */
+.apcard{background:var(--g50);border-radius:14px;padding:20px;margin-bottom:12px}
+.apcard h4{font-size:15px;font-weight:800;margin-bottom:6px;color:var(--blk)}
+.apcard p{font-size:14px;color:var(--txm);line-height:1.65}
+
+/* ── INFO GRID ────────────────────────────── */
+.igrid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:16px 0}
+.icard{background:#fff;border:1px solid var(--g200);border-radius:14px;padding:18px 14px;box-shadow:0 1px 8px rgba(0,0,0,.05)}
+.icard h4{font-size:22px;font-weight:900;color:var(--red);margin-bottom:4px}
+.icard p{font-size:12px;color:var(--txm);line-height:1.5}
+.icard.rb{border-left:4px solid var(--red)}
+
+/* ── NUMBERS BAND ─────────────────────────── */
+.nband{background:var(--red);padding:36px 20px}
+.nband h2{color:#fff;font-size:20px;font-weight:800;margin-bottom:20px}
+.nrow{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.nitem .n{color:#fff;font-size:32px;font-weight:900;line-height:1;font-family:'Playfair Display',serif}
+.nitem .nl{color:rgba(255,255,255,.82);font-size:12px;font-weight:600;margin-top:4px;line-height:1.35}
+
+/* ── DARK CTA ─────────────────────────────── */
+.dcta{position:relative;padding:56px 22px;text-align:center;overflow:hidden}
+.dcta-bg{position:absolute;inset:0;background-size:cover;background-position:center}
+.dcta-ov{position:absolute;inset:0;background:rgba(6,1,2,.9)}
+.dcta>*:not(.dcta-bg):not(.dcta-ov){position:relative;z-index:1}
+.dcta h2{color:#fff;font-size:27px;font-weight:800;margin-bottom:16px;line-height:1.3}
+.dcta p{color:rgba(255,255,255,.78);font-size:15px;line-height:1.68;margin-bottom:14px}
+.dcta .qv{font-style:italic;color:rgba(255,255,255,.72);font-size:14px;line-height:1.85}
+.dcta .qr{color:rgba(255,255,255,.42);font-size:13px;margin-bottom:28px}
+.ctarow{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin-bottom:12px}
+
+/* ── PHOTO STRIP ──────────────────────────── */
+.pstrip{display:grid;grid-template-columns:1fr 1fr 1fr;height:150px}
+.pstrip img{width:100%;height:100%;object-fit:cover;display:block}
+
+/* ── QUOTE BLOCK ──────────────────────────── */
+.qblk{background:var(--red);border-radius:18px;padding:28px 22px;margin:24px 0;text-align:center}
+.qblk p{color:rgba(255,255,255,.88);font-style:italic;font-size:15px;line-height:1.82;margin-bottom:10px}
+.qblk cite{color:rgba(255,255,255,.6);font-size:13px;font-style:normal;font-weight:600}
+
+/* ── TEXT CONTENT ─────────────────────────── */
+.tx p{font-size:15px;line-height:1.78;color:var(--tx);margin-bottom:16px}
+.tx .bold{font-size:16px;font-weight:700;color:var(--blk);margin-bottom:28px;line-height:1.55}
+.tx ul{padding-left:20px;margin-bottom:16px}
+.tx ul li{font-size:15px;line-height:1.72;color:var(--txm);margin-bottom:6px}
+
+/* ── INNER PAGE HERO ──────────────────────── */
+.pghero{position:relative;min-height:260px;display:flex;flex-direction:column;justify-content:flex-end;padding:80px 22px 36px;overflow:hidden}
+.pghero-bg{position:absolute;inset:0;background-size:cover;background-position:center}
+.pghero-ov{position:absolute;inset:0;background:rgba(6,1,2,.76)}
+.pghero>*:not(.pghero-bg):not(.pghero-ov){position:relative;z-index:1}
+.pghero h1{font-family:'Playfair Display',serif;font-size:30px;color:#fff;line-height:1.2;margin-bottom:10px}
+.pghero p{color:rgba(255,255,255,.8);font-size:15px;line-height:1.65}
+
+/* ── INNER CONTENT ────────────────────────── */
+.inn{padding:36px 22px}
+.inn h2{font-size:22px;font-weight:800;margin-bottom:12px;color:var(--blk)}
+.inn h3{font-size:18px;font-weight:700;margin-bottom:8px;color:var(--red)}
+.inn p{font-size:15px;line-height:1.78;color:var(--txm);margin-bottom:14px}
+.inn ul{padding-left:20px;margin-bottom:16px}
+.inn ul li{font-size:15px;line-height:1.72;color:var(--txm);margin-bottom:6px}
+.blk{margin-bottom:32px;padding-bottom:28px;border-bottom:1px solid var(--g200)}
+.blk:last-child{border-bottom:none;margin-bottom:0;padding-bottom:0}
+
+/* ── CONTACT FORM ─────────────────────────── */
+.frm{padding:0 22px 44px}
+.frm h2{font-size:22px;font-weight:800;margin-bottom:20px}
+.fg{margin-bottom:16px}
+.fl{font-size:13px;font-weight:700;margin-bottom:6px;display:block}
+.fl em{color:var(--red);font-style:normal}
+.fi,.fsel,.fta{width:100%;padding:13px 16px;border:1.5px solid var(--g200);border-radius:9px;font-size:15px;font-family:'Inter',sans-serif;color:var(--tx);outline:none;background:#fff;transition:border-color .2s}
+.fi:focus,.fsel:focus,.fta:focus{border-color:var(--red)}
+.fta{resize:vertical;min-height:120px}
+.fsub{width:100%;background:var(--red);color:#fff;border:none;border-radius:10px;padding:16px;font-size:16px;font-weight:700;cursor:pointer;font-family:'Inter',sans-serif;transition:background .2s}
+.fsub:hover{background:var(--rdk)}
+
+/* ── PARTNER GRID ─────────────────────────── */
+.pgrid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:16px 0}
+.pcard{background:#fff;border:1px solid var(--g200);border-radius:14px;padding:18px;box-shadow:0 1px 8px rgba(0,0,0,.05)}
+.pico{width:42px;height:42px;background:var(--red);border-radius:10px;display:flex;align-items:center;justify-content:center;margin-bottom:12px}
+.pico svg{width:20px;height:20px;fill:#fff}
+.pcard h4{font-size:14px;font-weight:800;margin-bottom:5px}
+.pcard p{font-size:12px;color:var(--txm);line-height:1.55}
+
+/* ── BTN ROW ──────────────────────────────── */
+.brow2{display:flex;gap:10px;flex-wrap:wrap;margin-top:22px}
+.brow2 .br{flex:1;text-align:center;border-radius:9px}
+.brow2 .bgr{flex:1}
+
+/* ── FOOTER ───────────────────────────────── */
+.ftr{background:var(--blk);padding:40px 22px 26px;color:#fff}
+.ftr-logo{display:flex;align-items:center;gap:12px;margin-bottom:20px}
+.ftr-ltext{font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:.06em;line-height:1.25;color:#fff}
+.socs{display:flex;gap:10px;margin-bottom:22px}
+.soc{width:38px;height:38px;background:var(--red);border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:background .2s,transform .15s}
+.soc:hover{background:var(--rdk);transform:scale(1.08)}
+.soc svg{width:16px;height:16px;fill:#fff}
+.ftr p{font-size:13px;color:rgba(255,255,255,.6);line-height:1.72;margin-bottom:10px}
+.fci{display:flex;align-items:flex-start;gap:10px;margin-bottom:12px;font-size:13px;color:rgba(255,255,255,.8)}
+.fci svg{width:16px;height:16px;fill:var(--red);flex-shrink:0;margin-top:1px}
+.facc{border:1px solid rgba(255,255,255,.14);border-radius:9px;padding:14px 16px;margin-bottom:10px;display:flex;justify-content:space-between;align-items:center;cursor:pointer;font-size:14px;color:rgba(255,255,255,.85);transition:background .2s}
+.facc:hover{background:rgba(255,255,255,.05)}
+.facc-b{display:none;padding:12px 16px;background:rgba(255,255,255,.04);border-radius:9px;margin-bottom:10px;line-height:2}
+.facc-b a{color:rgba(255,255,255,.72);font-size:13px;cursor:pointer}
+.facc-b a:hover{color:#fff}
+.fsub2{margin-top:22px}
+.fsub2-l{font-size:13px;color:rgba(255,255,255,.65);margin-bottom:8px}
+.fsub2-l em{color:var(--red);font-style:normal}
+.fein{width:100%;padding:12px 16px;border:1px solid rgba(255,255,255,.18);background:rgba(255,255,255,.06);border-radius:7px;color:#fff;font-size:14px;margin-bottom:10px;outline:none;font-family:'Inter',sans-serif}
+.fsb{width:100%;background:var(--red);color:#fff;border:none;border-radius:7px;padding:13px;font-size:15px;font-weight:700;cursor:pointer;font-family:'Inter',sans-serif}
+.fcopy{text-align:center;font-size:12px;color:rgba(255,255,255,.33);margin-top:28px;padding-top:16px;border-top:1px solid rgba(255,255,255,.1)}
+
+/* ── TOAST ────────────────────────────────── */
+.toast{position:fixed;bottom:28px;left:50%;transform:translateX(-50%);background:#166534;color:#fff;padding:12px 26px;border-radius:40px;font-size:14px;font-weight:600;z-index:9999;opacity:0;transition:opacity .3s;white-space:nowrap;pointer-events:none}
+.toast.show{opacity:1}
+
+/* ── INCLUSION / DATA RESEARCH CARDS ─────── */
+.datacard{background:#fff;border:1px solid var(--g200);border-radius:18px;padding:24px;margin-bottom:14px;box-shadow:0 2px 12px rgba(0,0,0,.06);display:flex;gap:16px;align-items:flex-start}
+.datacard .di{width:50px;height:50px;background:var(--red);border-radius:12px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.datacard .di svg{width:26px;height:26px;fill:#fff}
+.datacard h3{font-size:16px;font-weight:800;margin-bottom:6px;color:var(--blk)}
+.datacard p{font-size:14px;color:var(--txm);line-height:1.65}
+
+/* ── CONTACT MODAL ──────────────────────────── */
+.modal-bg{display:none;position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:2000;align-items:flex-end;justify-content:center}
+.modal-bg.open{display:flex}
+.modal-box{background:#fff;border-radius:22px 22px 0 0;width:100%;max-height:92vh;overflow-y:auto;padding:28px 22px 40px;animation:slideUp .3s ease}
+@keyframes slideUp{from{transform:translateY(100%)}to{transform:translateY(0)}}
+.modal-handle{width:40px;height:4px;background:var(--g200);border-radius:2px;margin:0 auto 20px}
+.modal-box h2{font-size:20px;font-weight:800;margin-bottom:6px}
+.modal-box p.sub{font-size:13px;color:var(--txm);margin-bottom:20px}
+.modal-close{float:right;background:none;border:none;font-size:24px;cursor:pointer;color:var(--txm);margin-top:-30px}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="hdr">
+  <div class="logo-wrap" onclick="go('home')">
+    <div class="logo-mark"><svg viewBox="0 0 32 32"><path d="M16 3C8.8 3 3 8.8 3 16s5.8 13 13 13 13-5.8 13-13S23.2 3 16 3zm0 23c-5.5 0-10-4.5-10-10S10.5 6 16 6c1.9 0 3.6.5 5.1 1.4C17.5 9.3 15 12.5 15 16.3c0 3.8 2.5 7 6.1 8.3C19.6 25.5 17.9 26 16 26z"/></svg></div>
+    <div class="logo-txt">Make Aid<br>Possible</div>
+  </div>
+  <button class="burger" onclick="openNav()"><span></span><span></span><span></span></button>
+</header>
+
+<!-- NAV DRAWER -->
+<div class="nav" id="nav">
+  <div class="nav-top">
+    <div class="logo-wrap" onclick="go('home');closeNav()">
+      <div class="logo-mark"><svg viewBox="0 0 32 32"><path d="M16 3C8.8 3 3 8.8 3 16s5.8 13 13 13 13-5.8 13-13S23.2 3 16 3zm0 23c-5.5 0-10-4.5-10-10S10.5 6 16 6c1.9 0 3.6.5 5.1 1.4C17.5 9.3 15 12.5 15 16.3c0 3.8 2.5 7 6.1 8.3C19.6 25.5 17.9 26 16 26z"/></svg></div>
+      <div class="logo-txt">Make Aid<br>Possible</div>
+    </div>
+    <button class="nav-x" onclick="closeNav()">✕</button>
+  </div>
+  <nav class="nav-links">
+    <a onclick="go('home');closeNav()">Home</a>
+    <a onclick="go('about');closeNav()">About ▾</a>
+    <a onclick="go('ourwork');closeNav()">Our Work ▾</a>
+    <a onclick="go('where');closeNav()">Where We Work</a>
+    <a onclick="go('impact');closeNav()">Impact</a>
+    <a onclick="go('partnerships');closeNav()">Partnerships</a>
+    <a onclick="go('governance');closeNav()">Governance</a>
+    <a onclick="go('insights');closeNav()">Insights</a>
+    <a onclick="go('getinvolved');closeNav()">Get Involved</a>
+    <a onclick="go('contact');closeNav()">Contact</a>
+  </nav>
+  <div class="nav-cta"><a onclick="go('getinvolved');closeNav()">Partner With Us</a></div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<!-- ══════════════════════════════════════════
+     HOME
+══════════════════════════════════════════ -->
+<div id="pg-home" class="pg active">
+
+  <!-- TICKER -->
+  <div class="ticker">
+    <div class="ticker-t">
+      <span class="ticker-s">500,000+ individuals reached &nbsp;•&nbsp; Direct presence in 22 countries &nbsp;•&nbsp; 62+ countries through partnerships &nbsp;•&nbsp; 16 core programs &nbsp;•&nbsp; 500+ interventions delivered &nbsp;•&nbsp; Middle East, Africa &amp; Europe &nbsp;•&nbsp;</span>
+      <span class="ticker-s">500,000+ individuals reached &nbsp;•&nbsp; Direct presence in 22 countries &nbsp;•&nbsp; 62+ countries through partnerships &nbsp;•&nbsp; 16 core programs &nbsp;•&nbsp; 500+ interventions delivered &nbsp;•&nbsp; Middle East, Africa &amp; Europe &nbsp;•&nbsp;</span>
+    </div>
+  </div>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-bg" style="background-image:url('https://images.unsplash.com/photo-1542810634-71277d95dcbb?w=900&q=80')"></div>
+    <div class="hero-ov"></div>
+    <div class="eyebrow">Canadian Humanitarian &amp; Development Organization</div>
+    <h1>Building Systems That Deliver Sustainable Development at Scale</h1>
+    <p class="hero-p">Make Aid Possible is a Canadian-based humanitarian and development organization delivering evidence-based, systems-level solutions to address complex global challenges at their root. Through a hybrid model of direct implementation and strategic partnerships, we strengthen systems, empower communities, and deliver measurable, long-term impact across regions.</p>
+    <div class="hbtns">
+      <a class="br" onclick="go('getinvolved')">Partner With Us</a>
+      <a class="bo" onclick="go('ourwork')">Explore Our Work</a>
+    </div>
+  </section>
+
+  <!-- 3 QUICK PILLS -->
+  <div class="qpills">
+    <a class="qp" onclick="go('ourwork')">
+      <div class="qpi"><svg viewBox="0 0 24 24"><path d="M12 3L1 9l11 6 9-4.91V17h2V9L12 3zM5 13.18v4L12 21l7-3.82v-4L12 17l-7-3.82z"/></svg></div>
+      <span>Our Programs</span>
+    </a>
+    <a class="qp" onclick="go('getinvolved')">
+      <div class="qpi"><svg viewBox="0 0 24 24"><path d="M12 21.593c-5.63-5.539-11-10.297-11-14.402 0-3.791 3.068-5.191 5.281-5.191 1.312 0 4.151.501 5.719 4.457 1.59-3.968 4.464-4.447 5.726-4.447 2.54 0 5.274 1.621 5.274 5.181 0 4.069-5.136 8.625-11 14.402z"/></svg></div>
+      <span>Donate</span>
+    </a>
+    <a class="qp" onclick="go('partnerships')">
+      <div class="qpi"><svg viewBox="0 0 24 24"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg></div>
+      <span>Partner</span>
+    </a>
+  </div>
+
+  <!-- STAY IN TOUCH -->
+  <div class="ecap">
+    <h2>Stay In Touch</h2>
+    <input type="email" id="e1" placeholder="Email">
+    <button onclick="sub('e1')">Subscribe to our Emails</button>
+  </div>
+
+  <!-- MISSION & VISION (from doc — homepage section) -->
+  <section class="sec-gray">
+    <div class="sl">Mission &amp; Vision</div>
+    <div class="st">Delivering Evidence-Based, Systems-Level Impact</div>
+    <div class="mvcard">
+      <h3>Our Mission</h3>
+      <p>We design and deliver evidence-based, systems-level solutions through direct implementation and strategic partnerships addressing complex challenges at their root and creating sustainable, measurable impact.</p>
+    </div>
+    <div class="mvcard">
+      <h3>Our Vision</h3>
+      <p>To advance a more effective, data-driven and partnership-based model for global development delivering scalable solutions through sustained, multi-country engagement and long-term system transformation.</p>
+    </div>
+    <br>
+    <a class="brp" onclick="go('about')">Learn More About Us</a>
+  </section>
+
+  <!-- WHO WE ARE (homepage section) -->
+  <section class="sec">
+    <div class="sl">Who We Are</div>
+    <div class="st">A Legacy of Impact</div>
+    <div class="tx">
+      <p>Make Aid Possible builds on a legacy of humanitarian and development work in the Middle East and Africa dating back to the early 2000s, with structured program implementation since 2014.</p>
+      <p>Operating through a regional hub in Jordan, we combine strategic oversight with localized implementation, maintaining a direct presence in 22 countries and extending our reach to more than 62 countries through trusted local partners.</p>
+      <p>Our work is grounded in local needs and aligned with national priorities, ensuring coordinated, context-driven interventions that deliver sustainable, long-term outcomes.</p>
+      <p>Through a dual model of direct implementation and strategic partnerships, we deliver both depth of impact and scalability across diverse environments including complex and conflict-affected settings.</p>
+    </div>
+    <div class="igrid">
+      <div class="icard rb"><h4>22</h4><p>Countries with direct program presence</p></div>
+      <div class="icard rb"><h4>62+</h4><p>Countries reached through partnerships</p></div>
+    </div>
+  </section>
+
+  <!-- OUR AREAS OF WORK (homepage section) -->
+  <section class="sec-gray">
+    <div class="sl">Our Areas of Work</div>
+    <div class="st">Four Core Pillars</div>
+    <div class="ss">We deliver integrated, systems-level programs across four core pillars:</div>
+
+    <div class="ccard">
+      <div class="cimg"><img src="https://images.unsplash.com/photo-1497486751825-1233686d5d80?w=700&q=80" alt="Education"><div class="cov"><div class="clbl">Education<span>Expanding Access. Building Futures.</span></div></div></div>
+      <div class="cbody"><h3>Education</h3><p>Expanding access to quality, inclusive education while strengthening long-term human capital development.</p><a class="brb" onclick="go('ourwork')">Explore Education Programs</a><a class="bgr" onclick="go('getinvolved')">Get Involved</a></div>
+    </div>
+
+    <div class="ccard">
+      <div class="cimg"><img src="https://images.unsplash.com/photo-1559757148-5ef78f9e0533?w=700&q=80" alt="Health"><div class="cov"><div class="clbl">Health<span>Essential Care. Stronger Systems.</span></div></div></div>
+      <div class="cbody"><h3>Health</h3><p>Improving access to essential healthcare services and strengthening community and system-level health outcomes.</p><a class="brb" onclick="go('ourwork')">Explore Health Programs</a><a class="bgr" onclick="go('getinvolved')">Get Involved</a></div>
+    </div>
+
+    <div class="ccard">
+      <div class="cimg"><img src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?w=700&q=80" alt="Economic Empowerment"><div class="cov"><div class="clbl">Economic Empowerment &amp; Inclusion<span>Skills. Pathways. Inclusion.</span></div></div></div>
+      <div class="cbody"><h3>Economic Empowerment &amp; Inclusion</h3><p>Enabling inclusive economic participation through employment pathways, skills development, and entrepreneurship.</p><a class="brb" onclick="go('ourwork')">Explore Economic Programs</a><a class="bgr" onclick="go('getinvolved')">Get Involved</a></div>
+    </div>
+
+    <div class="ccard">
+      <div class="cimg"><img src="https://images.unsplash.com/photo-1508193638397-1c4234db14d8?w=700&q=80" alt="Climate"><div class="cov"><div class="clbl">Climate &amp; Sustainability<span>Resilience. Future. Community.</span></div></div></div>
+      <div class="cbody"><h3>Climate &amp; Sustainability</h3><p>Advancing climate resilience and sustainable practices that strengthen environmental sustainability and community self-reliance.</p><a class="brb" onclick="go('ourwork')">Explore Climate Programs</a><a class="bgr" onclick="go('getinvolved')">Get Involved</a></div>
+    </div>
+  </section>
+
+  <!-- IMPACT (homepage section) -->
+  <section class="sec">
+    <div class="sl">Impact</div>
+    <div class="st">Delivering Measurable Impact Since 2014</div>
+    <div class="ss">Make Aid Possible delivers sustained, evidence-based impact through structured interventions designed to create long-term change for individuals, communities, and systems.</div>
+    <div class="st" style="font-size:18px;margin-bottom:16px">Impact at a Glance</div>
+    <div class="sgrid">
+      <div class="scard"><div class="sico"><svg viewBox="0 0 24 24"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg></div><p><strong>500,000+</strong> individuals reached</p></div>
+      <div class="scard"><div class="sico"><svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg></div><p><strong>22 countries</strong> with direct program presence</p></div>
+      <div class="scard"><div class="sico"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9V8h2v8zm4 0h-2V8h2v8z"/></svg></div><p><strong>62+ countries</strong> reached through partnerships</p></div>
+      <div class="scard"><div class="sico"><svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg></div><p><strong>16 core programs</strong> across key development pillars</p></div>
+      <div class="scard"><div class="sico"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 100 20A10 10 0 0012 2zm1 14.5h-2v-5h2v5zm0-7h-2V7h2v2.5z"/></svg></div><p><strong>500+ humanitarian</strong> and development interventions delivered</p></div>
+      <div class="scard"><div class="sico"><svg viewBox="0 0 24 24"><path d="M17 12h-5v5h5v-5zM16 1v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2h-1V1h-2zm3 18H5V8h14v11z"/></svg></div><p>Delivering impact <strong>since 2014</strong></p></div>
+    </div>
+    <p style="font-size:15px;font-weight:700;margin:18px 0 24px;color:var(--blk)">Our programs are delivered through locally led partnerships, ensuring relevance, ownership, and long-term sustainability.</p>
+
+    <!-- YouTube embed 1 -->
+    <div class="yt" id="yt1">
+      <div class="yt-th" onclick="loadYT('yt1','https://www.youtube.com/embed/K4TOrB7at0Y?autoplay=1')">
+        <img src="https://images.unsplash.com/photo-1469571486292-0ba58a3f068b?w=800&q=80" alt="Our impact">
+        <div class="yt-pb"><div class="yt-pc"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
+        <div class="yt-lbl">Communities We Serve</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FLAGSHIP INITIATIVES (homepage section) -->
+  <section class="sec-gray">
+    <div class="sl">Flagship Initiatives</div>
+    <div class="st">Programs Making a Difference</div>
+    <div class="flcard">
+      <img src="https://images.unsplash.com/photo-1559757148-5ef78f9e0533?w=700&q=80" alt="Hope for Vision">
+      <div class="flov"><h4>Hope for Vision</h4><p>Delivering life-changing eye care interventions for children — restoring sight and transforming futures.</p></div>
+    </div>
+    <div class="flcard">
+      <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=700&q=80" alt="Watan App">
+      <div class="flov"><h4>Watan App</h4><p>Connecting youth to employment through a digital platform bridging education and labor market opportunities.</p></div>
+    </div>
+    <div class="flcard">
+      <img src="https://images.unsplash.com/photo-1616587226157-48e49175ee20?w=700&q=80" alt="RAFAH Project">
+      <div class="flov"><h4>RAFAH Project</h4><p>Advancing integrated development through women's empowerment, education, and community resilience.</p></div>
+    </div>
+  </section>
+
+  <!-- PARTNERSHIPS (homepage section) -->
+  <section class="sec">
+    <div class="sl">Partnerships</div>
+    <div class="st">Stronger Together</div>
+    <div class="tx">
+      <p>We collaborate with governments, international organizations, private sector partners, NGOs, and community-based organizations to design and deliver high-impact, scalable solutions.</p>
+      <p>Our partnership model is built on shared value, long-term collaboration, and measurable outcomes enabling us to expand reach, strengthen systems, and deliver sustainable impact across regions.</p>
+    </div>
+    <div class="pstrip" style="border-radius:18px;overflow:hidden;margin:20px 0">
+      <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=400&q=75" alt="">
+      <img src="https://images.unsplash.com/photo-1509099836639-18ba1795216d?w=400&q=75" alt="">
+      <img src="https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?w=400&q=75" alt="">
+    </div>
+    <a class="brp" onclick="go('partnerships')">Learn More About Partnerships</a>
+  </section>
+
+  <!-- GOVERNANCE (homepage section) -->
+  <section class="sec-gray">
+    <div class="sl">Governance</div>
+    <div class="st">Strong Governance. Trusted Leadership.</div>
+    <div class="tx">
+      <p>Make Aid Possible operates under a robust governance framework that ensures accountability, transparency, and strategic oversight.</p>
+      <p>Our structure includes a Board of Directors, Strategic Advisors, and regional governance mechanisms, enabling effective decision-making and alignment across all areas of work.</p>
+    </div>
+    <a class="brp" onclick="go('governance')">View Leadership</a>
+  </section>
+
+  <!-- DATA & RESEARCH (homepage section — from doc) -->
+  <section class="sec">
+    <div class="sl">Data &amp; Research</div>
+    <div class="st">Driven by Data. Strengthening Local Knowledge.</div>
+    <div class="datacard">
+      <div class="di"><svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg></div>
+      <div><h3>Evidence-Based Programming</h3><p>We integrate data, research, and continuous learning into all aspects of our work — strengthening evidence-based programming and supporting long-term impact.</p></div>
+    </div>
+    <a class="brp" onclick="go('insights')">Explore Our Insights</a>
+  </section>
+
+  <!-- INCLUSION (homepage section — from doc) -->
+  <section style="padding:40px 20px;background:var(--red)">
+    <div class="sl" style="color:rgba(255,255,255,.7)">Inclusion</div>
+    <div class="st" style="color:#fff">Inclusive. Rights-Based. Community-Driven.</div>
+    <p style="color:rgba(255,255,255,.85);font-size:15px;line-height:1.75;margin-bottom:24px">Our work is grounded in inclusion and equity, ensuring that all individuals regardless of background have access to opportunities, services, and support.</p>
+    <a class="bw" onclick="go('about')">Learn More About Us</a>
+  </section>
+
+  <!-- NUMBERS BAND -->
+  <div class="nband">
+    <h2>Give With Purpose</h2>
+    <div class="nrow">
+      <div class="nitem"><div class="n">500K+</div><div class="nl">Individuals Reached</div></div>
+      <div class="nitem"><div class="n">22</div><div class="nl">Countries — Direct</div></div>
+      <div class="nitem"><div class="n">62+</div><div class="nl">Countries via Partners</div></div>
+      <div class="nitem"><div class="n">500+</div><div class="nl">Interventions Delivered</div></div>
+    </div>
+  </div>
+
+  <!-- FINAL CTA (from doc) -->
+  <section class="dcta">
+    <div class="dcta-bg" style="background-image:url('https://images.unsplash.com/photo-1547471080-7cc2caa01a7e?w=900&q=80')"></div>
+    <div class="dcta-ov"></div>
+    <div class="sl" style="color:rgba(255,255,255,.6)">Partner With Us to Drive Sustainable Impact</div>
+    <h2>We invite governments, institutions, private sector partners, and communities to collaborate with us in delivering sustainable, high-impact solutions at scale.</h2>
+    <p><strong style="color:#fff">Allah calls us to give with trust and sincerity:</strong></p>
+    <p class="qv">"The example of those who spend their wealth in the way of Allah is like a seed that grows seven ears; in every ear is a hundred grains."</p>
+    <p class="qr">(Qur'an 2:261)</p>
+    <div class="ctarow">
+      <a class="bw" onclick="go('getinvolved')">Partner With Us</a>
+      <a class="brow" onclick="go('partnerships')">Collaborate With Us</a>
+    </div>
+    <div class="ctarow">
+      <a class="br" onclick="openModal('Donor / Funding')">Donate</a>
+      <a class="brow" onclick="openModal()">Contact Us</a>
+    </div>
+  </section>
+
+  <!-- PHOTO STRIP -->
+  <div class="pstrip">
+    <img src="https://images.unsplash.com/photo-1542810634-71277d95dcbb?w=400&q=75" alt="">
+    <img src="https://images.unsplash.com/photo-1531206715517-5c0ba140b2b8?w=400&q=75" alt="">
+    <img src="https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?w=400&q=75" alt="">
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="ftr">
+    <div class="ftr-logo">
+      <div class="logo-mark" style="width:50px;height:50px"><svg viewBox="0 0 32 32"><path d="M16 3C8.8 3 3 8.8 3 16s5.8 13 13 13 13-5.8 13-13S23.2 3 16 3zm0 23c-5.5 0-10-4.5-10-10S10.5 6 16 6c1.9 0 3.6.5 5.1 1.4C17.5 9.3 15 12.5 15 16.3c0 3.8 2.5 7 6.1 8.3C19.6 25.5 17.9 26 16 26z"/></svg></div>
+      <div class="ftr-ltext">Make Aid<br>Possible</div>
+    </div>
+    <div class="socs">
+      <a href="https://www.linkedin.com/company/mapcanada" class="soc" target="_blank"><svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg></a>
+      <a href="https://www.instagram.com/map_canada" class="soc" target="_blank"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" fill="none" stroke="white" stroke-width="2"/><circle cx="12" cy="12" r="4" fill="none" stroke="white" stroke-width="2"/><circle cx="17.5" cy="6.5" r="1" fill="white"/></svg></a>
+      <a href="https://www.facebook.com/people/MAP-Canada/61577343145781" class="soc" target="_blank"><svg viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg></a>
+    </div>
+    <p>Make Aid Possible is a Canadian-based humanitarian and development organization delivering evidence-based, systems-level solutions to address complex global challenges at their root.</p>
+    <p>Operating across the Middle East, Africa, and Europe, with strategic engagement in Canada and extended reach in conflict-affected settings.</p>
+    <div class="ftr-contact" style="margin:20px 0">
+      <div class="fci"><svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>info@mapcan.ca</div>
+      <div class="fci"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/></svg>www.mapcan.ca</div>
+      <div class="fci"><svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/></svg>Canada (HQ) &amp; Jordan (Regional Hub)</div>
+    </div>
+    <div class="facc" onclick="tgl(this)">Our Programs <span>+</span></div>
+    <div class="facc-b"><a onclick="go('ourwork')">Education</a> &nbsp;|&nbsp; <a onclick="go('ourwork')">Health</a> &nbsp;|&nbsp; <a onclick="go('ourwork')">Economic Empowerment &amp; Inclusion</a> &nbsp;|&nbsp; <a onclick="go('ourwork')">Climate &amp; Sustainability</a></div>
+    <div class="facc" onclick="tgl(this)">Quick Links <span>+</span></div>
+    <div class="facc-b"><a onclick="go('about')">About</a> &nbsp;|&nbsp; <a onclick="go('where')">Where We Work</a> &nbsp;|&nbsp; <a onclick="go('impact')">Impact</a> &nbsp;|&nbsp; <a onclick="go('partnerships')">Partnerships</a> &nbsp;|&nbsp; <a onclick="go('governance')">Governance</a> &nbsp;|&nbsp; <a onclick="go('insights')">Insights</a> &nbsp;|&nbsp; <a onclick="go('contact');closeNav()">Contact</a></div>
+    <div class="facc" onclick="tgl(this)">Policies <span>+</span></div>
+    <div class="facc-b">Procurement &nbsp;|&nbsp; Safeguarding &nbsp;|&nbsp; Code of Conduct &nbsp;|&nbsp; Anti-Fraud &nbsp;|&nbsp; Risk Management &nbsp;|&nbsp; Data Protection &nbsp;|&nbsp; Financial Management</div>
+    <div class="fsub2">
+      <div class="fsub2-l">Email Address<em>*</em></div>
+      <input class="fein" type="email" id="fe1" placeholder="your@email.com">
+      <button class="fsb" onclick="sub('fe1')">Subscribe</button>
+    </div>
+    <div class="fcopy">© 2026 Make Aid Possible | All Rights Reserved &nbsp;·&nbsp; www.mapcan.ca</div>
+  </footer>
+</div><!-- /home -->
+
+<!-- ══════════════════════════════════════════
+     ABOUT
+══════════════════════════════════════════ -->
+<div id="pg-about" class="pg">
+  <div class="pghero">
+    <div class="pghero-bg" style="background-image:url('https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=900&q=80')"></div>
+    <div class="pghero-ov"></div>
+    <div class="sl">About Us</div>
+    <h1>About Make Aid Possible</h1>
+    <p>A systems-driven humanitarian and development organization delivering sustainable, inclusive, and evidence-based impact across the Middle East and Africa.</p>
+  </div>
+  <div class="inn">
+    <div class="blk">
+      <h2>About Make Aid Possible</h2>
+      <p>Make Aid Possible is a systems-driven humanitarian and development organization delivering sustainable, inclusive, and evidence-based impact across the Middle East and Africa, with strategic engagement in Canada.</p>
+      <p>Through locally led, partnership-based solutions, we design and deliver programs that address complex challenges while strengthening systems and enabling long-term, scalable outcomes.</p>
+      <p>Building on a legacy of work dating back to the early 2000s — with structured program implementation since 2014 — the organization has evolved into a multi-country platform delivering high-impact interventions across diverse sectors.</p>
+      <p>Operating through a regional hub in Jordan, we combine strategic oversight with localized implementation, maintaining a direct presence in 22 countries and extending our reach to more than 62 countries through trusted local partners.</p>
+      <p>Our programs are grounded in local needs and aligned with national priorities, ensuring coordinated, context-driven interventions that deliver sustainable development outcomes and long-term, system-level impact.</p>
+    </div>
+    <div class="blk">
+      <h2>Who We Are</h2>
+      <p>Make Aid Possible plays a strategic role in advancing inclusive, sustainable, and rights-based solutions across underserved communities.</p>
+      <p>Operating at the intersection of community-based programming and institutional engagement, we work closely with governments, local partners, and key stakeholders to deliver programs that are both responsive and scalable.</p>
+      <p>Through a structured, multi-country approach, our work addresses immediate needs while also strengthening systems, building institutional capacity, and enhancing long-term community resilience.</p>
+      <p>We operate in conflict-affected and high-need environments, using partnership-based models that enable safe, localized, and effective program delivery.</p>
+    </div>
+    <div class="blk">
+      <h2>Our Mission</h2>
+      <p>We design and deliver evidence-based, systems-level solutions that address complex humanitarian and development challenges at their root.</p>
+      <p>Through a hybrid model of direct implementation and strategic partnerships, we work across regions with trusted partners to ensure programs are locally relevant, scalable, and sustainable.</p>
+      <p>By integrating research, data, and innovation into every stage of delivery, we strengthen systems, empower communities, and deliver measurable, long-term impact.</p>
+    </div>
+    <div class="blk">
+      <h2>Our Vision</h2>
+      <p>To lead the evolution of humanitarian and development practice by building a globally influential, evidence-based platform that bridges research, policy, and implementation.</p>
+      <p>Through sustained, multi-country engagement and strategic partnerships, we aim to set new standards for impact, enabling communities and institutions worldwide to achieve sustainable, resilient, and inclusive development.</p>
+      <p>Our vision is centered on driving system-level transformation — shaping how development is designed, delivered, and sustained at scale.</p>
+    </div>
+    <div class="blk">
+      <h2>Our Approach</h2>
+      <p>Make Aid Possible delivers impact through an integrated model that combines direct implementation, strategic partnerships, and system-level engagement — ensuring that interventions are both effective in the short term and sustainable over time. Our approach focuses on strengthening systems, enabling local ownership, and driving long-term transformation across regions.</p>
+      <div class="apcard"><h4>Systems-Level Focus</h4><p>We address root causes by strengthening institutions, improving service delivery, and building long-term resilience.</p></div>
+      <div class="apcard"><h4>Integrated Delivery Model</h4><p>We combine direct implementation with strategic partnerships to deliver both operational depth and scalable reach.</p></div>
+      <div class="apcard"><h4>Localization and Ownership</h4><p>We prioritize locally led approaches that ensure relevance, cultural alignment, and long-term sustainability.</p></div>
+      <div class="apcard"><h4>Data, Evidence, and Learning</h4><p>We integrate monitoring, evaluation, and adaptive learning to continuously improve effectiveness and impact.</p></div>
+      <div class="apcard"><h4>Alignment with National Systems</h4><p>All programs are aligned with national priorities and institutional frameworks to ensure coordinated and sustainable outcomes.</p></div>
+      <div class="apcard"><h4>Sustainability and Scale</h4><p>We design solutions that are built to last — focusing on quality, scalability, and system strengthening.</p></div>
+    </div>
+    <div class="blk">
+      <h2>Leadership &amp; Governance</h2>
+      <p>Make Aid Possible operates under a multi-level governance and leadership structure designed to ensure accountability, transparency, and strategic direction.</p>
+      <p>The organization is guided by a Board of Directors, supported by Strategic Advisors and Honorary Board Members, bringing expertise across development, governance, and institutional leadership.</p>
+      <p>At the regional level, a dedicated board for the Middle East and Africa provides oversight to ensure alignment with regional priorities and contextual realities.</p>
+      <p>This framework ensures effective decision-making, strong oversight, and institutional integrity across all areas of work.</p>
+      <a class="brp" onclick="go('governance')">View Leadership</a>
+    </div>
+    <div class="blk">
+      <h2>Scale and Positioning</h2>
+      <p>Through its multi-country operations and extensive partnership network, Make Aid Possible contributes to development efforts at scale while maintaining a strong focus on quality, sustainability, and long-term outcomes.</p>
+      <p>Its model integrates implementation, partnerships, and system-level engagement, ensuring that impact is both scalable and sustainable.</p>
+      <p>This positions Make Aid Possible as a trusted partner for governments, institutions, and international stakeholders, capable of contributing to large-scale, multi-stakeholder initiatives.</p>
+      <div class="brow2"><a class="br" onclick="go('getinvolved')">Partner With Us</a><a class="bgr" onclick="openModal()">Contact Us</a></div>
+    </div>
+  </div>
+  <div class="pstrip"><img src="https://images.unsplash.com/photo-1542810634-71277d95dcbb?w=400&q=75" alt=""><img src="https://images.unsplash.com/photo-1469571486292-0ba58a3f068b?w=400&q=75" alt=""><img src="https://images.unsplash.com/photo-1509099836639-18ba1795216d?w=400&q=75" alt=""></div>
+  <div id="ftr-about"></div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     OUR WORK
+══════════════════════════════════════════ -->
+<div id="pg-ourwork" class="pg">
+  <div class="pghero">
+    <div class="pghero-bg" style="background-image:url('https://images.unsplash.com/photo-1527525443983-6e60c75fff46?w=900&q=80')"></div>
+    <div class="pghero-ov"></div>
+    <div class="sl">Our Work</div>
+    <h1>Programs That Create Lasting Change</h1>
+    <p>Integrated, evidence-based programs across education, health, economic empowerment, and climate sustainability.</p>
+  </div>
+  <div class="inn">
+    <div class="blk">
+      <p>Make Aid Possible designs and delivers integrated, evidence-based programs that address complex humanitarian and development challenges across multiple sectors. Through a structured portfolio of interventions, we deliver sustainable, scalable, and systems-level impact across the Middle East and Africa, with extended reach through partnerships in additional regions, including Europe and conflict-affected settings.</p>
+      <p>Programs are implemented through a combination of direct implementation and strategic partnerships, ensuring both operational depth and expanded reach. All interventions are designed based on local needs and aligned with national priorities and development frameworks, ensuring relevance, coordination, and long-term sustainability.</p>
+    </div>
+
+    <!-- YouTube embed 2 -->
+    <div class="yt" id="yt2" style="margin-bottom:28px">
+      <div class="yt-th" onclick="loadYT('yt2','https://www.youtube.com/embed/K4TOrB7at0Y?autoplay=1')">
+        <img src="https://images.unsplash.com/photo-1469571486292-0ba58a3f068b?w=800&q=80" alt="Programs in action">
+        <div class="yt-pb"><div class="yt-pc"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
+        <div class="yt-lbl">Our Programs in Action</div>
+      </div>
+    </div>
+
+    <div class="blk">
+      <h2>Our Program Areas</h2>
+      <p>Our work is structured across four core pillars:</p>
+
+      <div class="ccard">
+        <div class="cimg"><img src="https://images.unsplash.com/photo-1509099836639-18ba1795216d?w=700&q=80" alt="Education"><div class="cov"><div class="clbl">Education</div></div></div>
+        <div class="cbody"><h3>Education</h3><p>We advance equitable access to quality and inclusive education through scholarships, academic support, and targeted interventions that reduce barriers to learning. Our programs strengthen long-term human capital development, enabling individuals to achieve educational success and expand future opportunities.</p><a class="brb" onclick="go('getinvolved')">Partner With Us</a><a class="bgr" onclick="openModal()">Support This Program</a></div>
+      </div>
+      <div class="ccard">
+        <div class="cimg"><img src="https://images.unsplash.com/photo-1559757148-5ef78f9e0533?w=700&q=80" alt="Health"><div class="cov"><div class="clbl">Health</div></div></div>
+        <div class="cbody"><h3>Health</h3><p>We strengthen healthcare systems and improve access to essential health services through integrated, community-based interventions. Our programs address both immediate needs and long-term system strengthening, including eye care, mental health, and substance abuse support.</p><a class="brb" onclick="go('getinvolved')">Partner With Us</a><a class="bgr" onclick="openModal()">Support This Program</a></div>
+      </div>
+      <div class="ccard">
+        <div class="cimg"><img src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?w=700&q=80" alt="Economic Empowerment"><div class="cov"><div class="clbl">Economic Empowerment &amp; Inclusion</div></div></div>
+        <div class="cbody"><h3>Economic Empowerment &amp; Inclusion</h3><p>We enable access to employment, skills development, and entrepreneurship opportunities, particularly for youth and women. Our programs support income generation, workforce integration, and inclusive economic participation, contributing to sustainable livelihoods and economic resilience.</p><a class="brb" onclick="go('getinvolved')">Partner With Us</a><a class="bgr" onclick="openModal()">Support This Program</a></div>
+      </div>
+      <div class="ccard">
+        <div class="cimg"><img src="https://images.unsplash.com/photo-1508193638397-1c4234db14d8?w=700&q=80" alt="Climate"><div class="cov"><div class="clbl">Climate &amp; Sustainability</div></div></div>
+        <div class="cbody"><h3>Climate &amp; Sustainability</h3><p>We advance climate resilience and environmental sustainability through awareness, locally driven production systems, and community-based initiatives. Our work supports communities in adapting to climate challenges while strengthening self-reliance and long-term sustainability.</p><a class="brb" onclick="go('getinvolved')">Partner With Us</a><a class="bgr" onclick="openModal()">Support This Program</a></div>
+      </div>
+    </div>
+
+    <div class="blk">
+      <h2>How We Deliver</h2>
+      <p>Make Aid Possible operates through a structured and scalable delivery model:</p>
+      <div class="svcard"><div class="svico"><svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/></svg></div><div><h4>Direct Implementation</h4><p>Programs are delivered in countries where we maintain operational presence and structured systems.</p></div></div>
+      <div class="svcard"><div class="svico"><svg viewBox="0 0 24 24"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg></div><div><h4>Partnership-Based Delivery</h4><p>Programs are implemented through trusted local organizations, ensuring reach and contextual relevance.</p></div></div>
+      <div class="svcard"><div class="svico"><svg viewBox="0 0 24 24"><path d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10zm-1-11v6h2v-6h-2zm0-4v2h2V7h-2z"/></svg></div><div><h4>Localization-Focused Approach</h4><p>We prioritize community ownership to ensure sustainability and long-term impact.</p></div></div>
+      <div class="svcard"><div class="svico"><svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2z"/></svg></div><div><h4>Alignment with National Frameworks</h4><p>All interventions are aligned with national systems to support coordinated and sustainable development outcomes.</p></div></div>
+    </div>
+
+    <div class="blk">
+      <h2>Program Structure and Scale</h2>
+      <p>Make Aid Possible delivers a portfolio of 16 core programs across its four pillars, implemented across multiple countries. Each program is designed using a structured model that ensures measurable outputs and long-term outcomes, enabling consistency, quality, and scalability.</p>
+    </div>
+
+    <div class="blk">
+      <h2>Impact Across Our Work</h2>
+      <div class="sgrid">
+        <div class="scard"><div class="sico"><svg viewBox="0 0 24 24"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg></div><p><strong>500,000+</strong> individuals reached</p></div>
+        <div class="scard"><div class="sico"><svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/></svg></div><p><strong>22 countries</strong> with direct program implementation</p></div>
+        <div class="scard"><div class="sico"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/></svg></div><p><strong>62+ countries</strong> reached through partnerships</p></div>
+        <div class="scard"><div class="sico"><svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2z"/></svg></div><p><strong>16 core programs</strong> across key development pillars</p></div>
+        <div class="scard"><div class="sico"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 100 20A10 10 0 0012 2z"/></svg></div><p><strong>500+ humanitarian</strong> and development interventions delivered</p></div>
+      </div>
+      <p style="margin-top:12px;font-size:14px;color:var(--txm)">Programs are delivered through locally led partnerships, ensuring relevance, ownership, and long-term sustainability.</p>
+    </div>
+
+    <div class="blk">
+      <h2>Our Approach to Impact</h2>
+      <p>We prioritize quality over quantity, ensuring that each intervention contributes to long-term outcomes rather than short-term outputs. By integrating data, research, and continuous learning, our programs are continuously refined to maximize effectiveness, adaptability, and sustainability. This ensures that impact is measurable, durable, and scalable across regions.</p>
+    </div>
+
+    <div class="blk">
+      <h2>Work With Us</h2>
+      <p>Make Aid Possible collaborates with governments, institutions, private sector partners, and local organizations to design and deliver high-impact, scalable solutions.</p>
+      <div class="brow2"><a class="br" onclick="go('getinvolved')">Partner With Us</a><a class="bgr" onclick="go('partnerships')">Collaborate With Us</a></div>
+    </div>
+  </div>
+  <div id="ftr-ourwork"></div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     WHERE WE WORK
+══════════════════════════════════════════ -->
+<div id="pg-where" class="pg">
+  <div class="pghero">
+    <div class="pghero-bg" style="background-image:url('https://images.unsplash.com/photo-1526778548025-fa2f459cd5c1?w=900&q=80')"></div>
+    <div class="pghero-ov"></div>
+    <div class="sl">Where We Work</div>
+    <h1>A Global Presence, Locally Grounded</h1>
+    <p>Direct presence in 22 countries. Extended reach to 62+ countries through trusted local partnerships.</p>
+  </div>
+  <div class="inn">
+    <div class="blk">
+      <h2>Where We Work</h2>
+      <p>Make Aid Possible operates as a multi-country platform delivering systems-level solutions across regions. With a strong operational presence in the Middle East and Africa, and strategic engagement in Canada, we design and deliver context-driven programs tailored to national priorities and community needs.</p>
+      <p>Through trusted local partnerships, we extend our reach into Europe and conflict-affected settings, enabling safe, effective, and scalable delivery across diverse and complex environments.</p>
+    </div>
+
+    <div class="blk">
+      <h2>Our Global Reach</h2>
+      <p>Make Aid Possible maintains a direct program presence in 22 countries and extends its reach to more than 62 countries through a network of trusted local partners. This model enables both operational depth and geographic scale, ensuring that interventions are locally grounded while contributing to broader, system-level outcomes.</p>
+      <div class="igrid">
+        <div class="icard rb"><h4>22</h4><p>Countries with direct program presence</p></div>
+        <div class="icard rb"><h4>62+</h4><p>Countries reached through partnerships</p></div>
+      </div>
+    </div>
+
+    <div class="blk">
+      <h2>Regional Focus</h2>
+
+      <!-- Middle East and Africa — WITH PHOTO -->
+      <div class="rcard">
+        <img src="https://images.unsplash.com/photo-1547471080-7cc2caa01a7e?w=700&q=80" alt="Middle East and Africa">
+        <div class="rov">
+          <h3>Middle East and Africa</h3>
+          <p>Our primary focus — delivering multi-sector, systems-level programs through our regional hub in Jordan.</p>
+        </div>
+      </div>
+      <p>Our primary focus is across the Middle East and Africa, where we deliver multi-sector, systems-level programs addressing complex humanitarian and development challenges. Operating through a regional hub in Jordan, we work in close collaboration with local partners, communities, and institutional stakeholders, ensuring alignment with national priorities and regional frameworks. These regions represent dynamic and often fragile contexts where we deliver targeted, scalable, and sustainable interventions across our core program areas.</p>
+
+      <!-- Europe and Extended Regions — WITH PHOTO -->
+      <div class="rcard" style="margin-top:24px">
+        <img src="https://images.unsplash.com/photo-1467269204594-9661b134dd2b?w=700&q=80" alt="Europe">
+        <div class="rov">
+          <h3>Europe and Extended Regions</h3>
+          <p>Through strategic partnerships, extending our presence into Europe and additional regions.</p>
+        </div>
+      </div>
+      <p>Through strategic partnerships, we extend our presence into Europe and additional regions, supporting program delivery, coordination, and cross-regional collaboration. This flexible model enables engagement across diverse contexts while maintaining consistent standards of quality, accountability, and impact.</p>
+
+      <!-- Canada — WITH PHOTO -->
+      <div class="rcard" style="margin-top:24px">
+        <img src="https://images.unsplash.com/photo-1464817739973-0128fe77aaa1?w=700&q=80" alt="Canada">
+        <div class="rov">
+          <h3>Canada (Strategic Engagement)</h3>
+          <p>Global headquarters — leading strategy, governance, partnerships, and institutional engagement.</p>
+        </div>
+      </div>
+      <p>In Canada, Make Aid Possible maintains a strategic presence focused on partnership development, coordination, and institutional engagement. This includes collaboration with government entities, private sector partners, and international organizations to support resource mobilization, program design, and cross-regional alignment.</p>
+    </div>
+
+    <div class="blk">
+      <h2>Operating in Complex and Conflict-Affected Settings</h2>
+      <!-- Conflict settings — WITH PHOTO -->
+      <div class="rcard" style="margin-bottom:16px">
+        <img src="https://images.unsplash.com/photo-1469571486292-0ba58a3f068b?w=700&q=80" alt="Conflict settings">
+        <div class="rov">
+          <h3>Complex &amp; Conflict-Affected Settings</h3>
+          <p>Partnership-based models that prioritize safety, localization, and effectiveness.</p>
+        </div>
+      </div>
+      <p>Make Aid Possible operates in fragile and conflict-affected environments through partnership-based models that prioritize safety, localization, and effectiveness. By working with trusted local partners, programs are delivered in a manner that is context-sensitive, accessible, and responsive to urgent needs, while maintaining long-term development impact.</p>
+    </div>
+
+    <div class="blk">
+      <h2>How We Operate Across Countries</h2>
+      <p>Make Aid Possible applies a flexible and scalable operating model tailored to each country context:</p>
+      <div class="svcard"><div class="svico"><svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/></svg></div><div><h4>Direct Presence (22 Countries)</h4><p>Programs are implemented through dedicated operational teams and structured delivery systems.</p></div></div>
+      <div class="svcard"><div class="svico"><svg viewBox="0 0 24 24"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg></div><div><h4>Partnership-Based Presence (62+ Countries)</h4><p>Programs are delivered through trusted local organizations, ensuring local ownership, relevance, and sustainability.</p></div></div>
+    </div>
+
+    <div class="blk">
+      <h2>Localization and Context-Driven Programming</h2>
+      <p>Localization is central to how we work. We collaborate closely with local partners to ensure that all interventions are grounded in community realities. Programs are designed and adapted to local contexts while aligned with national systems, ensuring relevance, integration, and long-term impact. This approach enables consistent delivery across diverse environments while maintaining high standards of quality and outcomes.</p>
+    </div>
+
+    <div class="blk">
+      <h2>Scale and Impact Across Regions</h2>
+      <p>Through its multi-country presence and partnership network, Make Aid Possible delivers impact at scale. This operating model enables the delivery of both targeted interventions and scalable, system-level impact across diverse environments.</p>
+      <div class="sgrid">
+        <div class="scard"><div class="sico"><svg viewBox="0 0 24 24"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg></div><p><strong>500,000+</strong> individuals reached</p></div>
+        <div class="scard"><div class="sico"><svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/></svg></div><p><strong>22 countries</strong> with direct program implementation</p></div>
+        <div class="scard"><div class="sico"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/></svg></div><p><strong>62+ countries</strong> reached through partnerships</p></div>
+      </div>
+    </div>
+
+    <div class="blk">
+      <h2>Work With Us Across Regions</h2>
+      <p>Make Aid Possible collaborates with governments, institutions, private sector partners, and local organizations across all regions of operation. We welcome partnerships that contribute to delivering sustainable, high-impact solutions aligned with country-specific priorities.</p>
+      <div class="brow2"><a class="br" onclick="go('getinvolved')">Partner With Us</a><a class="bgr" onclick="go('partnerships')">Collaborate With Us</a></div>
+    </div>
+  </div>
+  <div id="ftr-where"></div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     IMPACT
+══════════════════════════════════════════ -->
+<div id="pg-impact" class="pg">
+  <div class="pghero">
+    <div class="pghero-bg" style="background-image:url('https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?w=900&q=80')"></div>
+    <div class="pghero-ov"></div>
+    <div class="sl">Impact</div>
+    <h1>Delivering Measurable Impact Since 2014</h1>
+    <p>Sustained, evidence-based impact through structured interventions designed for long-term, systemic change.</p>
+  </div>
+  <div class="inn">
+    <div class="blk">
+      <h2>Impact</h2>
+      <p>Make Aid Possible delivers measurable, sustainable impact through structured, evidence-based interventions across regions. Since 2014, our work has focused on achieving long-term, system-level outcomes that go beyond short-term assistance — strengthening institutions, empowering communities, and driving lasting change.</p>
+    </div>
+    <div class="blk">
+      <h2>Impact at a Glance</h2>
+      <div class="sgrid">
+        <div class="scard"><div class="sico"><svg viewBox="0 0 24 24"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg></div><p><strong>500,000+</strong> individuals reached through sustained, program-based interventions</p></div>
+        <div class="scard"><div class="sico"><svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/></svg></div><p><strong>22 countries</strong> with direct program implementation</p></div>
+        <div class="scard"><div class="sico"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/></svg></div><p><strong>62+ countries</strong> reached through partnerships</p></div>
+        <div class="scard"><div class="sico"><svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2z"/></svg></div><p><strong>16 core programs</strong> across key development pillars</p></div>
+        <div class="scard"><div class="sico"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 100 20A10 10 0 0012 2z"/></svg></div><p><strong>500+ humanitarian</strong> and development interventions delivered</p></div>
+      </div>
+      <p style="font-size:14px;color:var(--txm);margin-top:12px">Our programs are implemented through locally led partnerships, ensuring relevance, community ownership, and long-term sustainability.</p>
+    </div>
+
+    <!-- YouTube embed 3 -->
+    <div class="yt" id="yt3">
+      <div class="yt-th" onclick="loadYT('yt3','https://www.youtube.com/embed/K4TOrB7at0Y?autoplay=1')">
+        <img src="https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?w=800&q=80" alt="Impact stories">
+        <div class="yt-pb"><div class="yt-pc"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
+        <div class="yt-lbl">Impact Stories</div>
+      </div>
+    </div>
+
+    <div class="blk">
+      <h2>Delivering Impact Across Sectors</h2>
+      <div class="apcard"><h4>Education</h4><p>Programs have expanded access to quality, inclusive education, enabling students to continue their studies and strengthen long-term opportunities.</p></div>
+      <div class="apcard"><h4>Health</h4><p>Interventions have improved access to essential healthcare services, including eye care, mental health support, and substance abuse awareness — contributing to improved health outcomes and quality of life.</p></div>
+      <div class="apcard"><h4>Economic Empowerment &amp; Inclusion</h4><p>Programs have enabled individuals to access employment, develop skills, and engage in income-generating opportunities, strengthening economic resilience and long-term stability.</p></div>
+      <div class="apcard"><h4>Climate &amp; Sustainability</h4><p>Initiatives have supported communities in adapting to climate challenges, promoting sustainable practices, and strengthening environmental resilience and self-reliance.</p></div>
+    </div>
+
+    <div class="blk">
+      <h2>How Impact Is Delivered</h2>
+      <p>Impact is achieved through a structured model that combines:</p>
+      <ul><li>Direct Implementation in countries with operational presence</li><li>Partnership-Based Delivery through trusted local organizations</li><li>Localization-Focused Programming ensuring community ownership</li><li>Alignment with National Frameworks to support coordinated outcomes</li></ul>
+      <p>This approach ensures that interventions are both effective in the short term and sustainable in the long term.</p>
+    </div>
+    <div class="blk">
+      <h2>Quality Over Quantity</h2>
+      <p>We prioritize long-term outcomes over short-term outputs, ensuring that every intervention contributes to sustainable change. Programs are designed to deliver meaningful, measurable impact, rather than temporary results.</p>
+    </div>
+    <div class="blk">
+      <h2>Data, Learning, and Continuous Improvement</h2>
+      <p>Make Aid Possible integrates data, research, and continuous learning into all aspects of its work. Programs are continuously monitored and refined to improve effectiveness, adapt to changing contexts, and maximize impact across regions.</p>
+    </div>
+    <div class="blk">
+      <h2>Impact Through Partnerships</h2>
+      <p>Impact is strengthened through collaboration with governments, institutions, private sector partners, and local organizations. These partnerships enable us to scale our work, extend our reach, and deliver coordinated, high-impact solutions.</p>
+    </div>
+    <div class="blk">
+      <h2>Looking Ahead</h2>
+      <p>Make Aid Possible is committed to expanding its impact by scaling successful models, strengthening partnerships, and advancing evidence-based, systems-level solutions across regions.</p>
+    </div>
+    <div class="blk">
+      <h2>Be Part of the Impact</h2>
+      <p>We invite partners, donors, and institutions to contribute to expanding our impact and delivering sustainable development solutions at scale.</p>
+      <div class="brow2"><a class="br" onclick="go('getinvolved')">Partner With Us</a><a class="bgr" onclick="go('getinvolved')">Support Our Work</a><a class="bgr" onclick="openModal()">Contact Us</a></div>
+    </div>
+  </div>
+  <div id="ftr-impact"></div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     PARTNERSHIPS
+══════════════════════════════════════════ -->
+<div id="pg-partnerships" class="pg">
+  <div class="pghero">
+    <div class="pghero-bg" style="background-image:url('https://images.unsplash.com/photo-1552664730-d307ca884978?w=900&q=80')"></div>
+    <div class="pghero-ov"></div>
+    <div class="sl">Partnerships</div>
+    <h1>Stronger Together</h1>
+    <p>Collaborating with governments, institutions, and organizations to design and deliver high-impact solutions at scale.</p>
+  </div>
+  <div class="inn">
+    <div class="blk">
+      <h2>Partnerships</h2>
+      <p>Make Aid Possible works in collaboration with a diverse network of partners to design and deliver sustainable, high-impact solutions across regions. Through a partnership-driven model, we combine technical expertise, local knowledge, and institutional collaboration to address complex humanitarian and development challenges at scale.</p>
+    </div>
+    <div class="blk">
+      <h2>Our Partnership Approach</h2>
+      <p>Our approach to partnerships is built on shared value, mutual accountability, and long-term engagement. By aligning priorities, resources, and expertise, we develop partnerships that deliver measurable outcomes while contributing to sustainable development at both community and system levels.</p>
+    </div>
+    <div class="blk">
+      <h2>Who We Partner With</h2>
+      <p>We collaborate with a wide range of partners, including:</p>
+      <div class="pgrid">
+        <div class="pcard"><div class="pico"><svg viewBox="0 0 24 24"><path d="M12 3L1 9l11 6 9-4.91V17h2V9L12 3z" fill="white"/></svg></div><h4>Governments &amp; Public Institutions</h4><p>National and regional governments driving systemic change</p></div>
+        <div class="pcard"><div class="pico"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z" fill="white"/></svg></div><h4>International Organizations</h4><p>Multilateral agencies and global development institutions</p></div>
+        <div class="pcard"><div class="pico"><svg viewBox="0 0 24 24"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5z" fill="white"/></svg></div><h4>NGOs &amp; Community Organizations</h4><p>Non-governmental and community-based organizations</p></div>
+        <div class="pcard"><div class="pico"><svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2z" fill="white"/></svg></div><h4>Private Sector Partners</h4><p>Corporate partners committed to shared-value development</p></div>
+        <div class="pcard"><div class="pico"><svg viewBox="0 0 24 24"><path d="M12 3L1 9l11 6 9-4.91V17h2V9L12 3zM5 13.18v4L12 21l7-3.82v-4L12 17l-7-3.82z" fill="white"/></svg></div><h4>Academic &amp; Research Institutions</h4><p>Universities and think tanks supporting evidence-based work</p></div>
+        <div class="pcard"><div class="pico"><svg viewBox="0 0 24 24"><path d="M12 21.593c-5.63-5.539-11-10.297-11-14.402 0-3.791 3.068-5.191 5.281-5.191 1.312 0 4.151.501 5.719 4.457 1.59-3.968 4.464-4.447 5.726-4.447 2.54 0 5.274 1.621 5.274 5.181 0 4.069-5.136 8.625-11 14.402z" fill="white"/></svg></div><h4>Donors &amp; Funding Agencies</h4><p>Funders enabling scale, reach, and sustainable program delivery</p></div>
+      </div>
+      <p style="font-size:14px;color:var(--txm);margin-top:8px">These partnerships enable effective delivery across diverse contexts while maintaining quality, relevance, and impact.</p>
+    </div>
+    <div class="blk">
+      <h2>Partnership Models</h2>
+      <p>Make Aid Possible engages through multiple partnership models:</p>
+      <div class="apcard"><h4>Program Implementation Partnerships</h4><p>Collaborating with local and international partners to design and deliver programs across sectors and regions.</p></div>
+      <div class="apcard"><h4>Strategic and Institutional Partnerships</h4><p>Working with governments and institutions to support system-level initiatives aligned with national and global priorities.</p></div>
+      <div class="apcard"><h4>Funding and Donor Partnerships</h4><p>Partnering with donors and funding agencies to scale high-impact interventions and expand program reach.</p></div>
+      <div class="apcard"><h4>Private Sector Engagement</h4><p>Collaborating with companies to develop shared-value initiatives and sustainable development solutions.</p></div>
+    </div>
+    <div class="blk">
+      <h2>Why Partner With Us</h2>
+      <p>Partners choose to work with Make Aid Possible because of our:</p>
+      <ul><li>Multi-country operational presence</li><li>Strong localization approach</li><li>Evidence-based, systems-driven programming</li><li>Proven ability to deliver scalable and sustainable impact</li><li>Structured governance and accountability framework</li></ul>
+    </div>
+    <div class="blk">
+      <h2>Partnerships in Practice</h2>
+      <p>Make Aid Possible works with partners across the Middle East, Africa, and Europe, with strategic engagement in Canada and extended reach in conflict-affected environments through trusted local partners. Through these collaborations, programs are tailored to local contexts while aligned with national and global priorities, ensuring both immediate results and long-term system strengthening.</p>
+      <!-- Photo -->
+      <div style="border-radius:18px;overflow:hidden;height:200px;margin:16px 0"><img src="https://images.unsplash.com/photo-1509099836639-18ba1795216d?w=700&q=80" alt="Partnerships in practice" style="width:100%;height:100%;object-fit:cover"></div>
+    </div>
+    <div class="blk">
+      <h2>Work With Us</h2>
+      <p>Make Aid Possible welcomes collaboration with governments, institutions, private sector partners, and organizations committed to advancing sustainable development.</p>
+      <div class="brow2"><a class="br" onclick="go('getinvolved')">Partner With Us</a><a class="bgr" onclick="go('getinvolved')">Collaborate With Us</a><a class="bgr" onclick="openModal()">Contact Us</a></div>
+    </div>
+  </div>
+  <div id="ftr-partnerships"></div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     GOVERNANCE
+══════════════════════════════════════════ -->
+<div id="pg-governance" class="pg">
+  <div class="pghero">
+    <div class="pghero-bg" style="background-image:url('https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=900&q=80')"></div>
+    <div class="pghero-ov"></div>
+    <div class="sl">Governance</div>
+    <h1>Strong Governance. Trusted Leadership.</h1>
+    <p>A robust governance framework ensuring accountability, transparency, and strategic oversight across all areas of work.</p>
+  </div>
+  <div class="inn">
+    <div class="blk">
+      <h2>Governance</h2>
+      <p>Make Aid Possible operates under a robust governance framework designed to ensure accountability, transparency, and strategic leadership across all areas of work. Our governance model enables effective oversight, responsible decision-making, and the delivery of sustainable, high-impact programs across diverse regional contexts.</p>
+    </div>
+    <div class="blk">
+      <h2>Governance Structure</h2>
+      <p>Make Aid Possible is guided by a multi-level governance framework that includes:</p>
+      <div class="mvcard"><h3>Board of Directors</h3><p>Provides strategic direction, fiduciary oversight, and governance leadership ensuring accountability for organizational performance, financial management, and compliance.</p></div>
+      <div class="mvcard"><h3>Strategic Advisors</h3><p>Offer specialized expertise across development, governance, and innovation — strengthening decision-making and institutional positioning.</p></div>
+      <div class="mvcard"><h3>Honorary Board Members</h3><p>Support global outreach, partnership development, and institutional credibility.</p></div>
+      <div class="mvcard"><h3>Regional Board of Directors (Middle East and Africa)</h3><p>Based in Jordan, provides regional oversight and ensures alignment with local priorities and contextual realities.</p></div>
+    </div>
+    <div class="blk">
+      <h2>Core Governance Functions</h2>
+      <p>Our governance framework ensures the following:</p>
+      <div class="igrid">
+        <div class="icard rb"><h4 style="font-size:14px;color:var(--blk)">Strategic Oversight &amp; Direction</h4><p>Guiding long-term priorities, growth, and institutional positioning</p></div>
+        <div class="icard rb"><h4 style="font-size:14px;color:var(--blk)">Financial Stewardship</h4><p>Ensuring responsible management and transparent reporting</p></div>
+        <div class="icard rb"><h4 style="font-size:14px;color:var(--blk)">Risk Management</h4><p>Identifying and mitigating operational and programmatic risks</p></div>
+        <div class="icard rb"><h4 style="font-size:14px;color:var(--blk)">Compliance &amp; Regulatory Alignment</h4><p>Adhering to legal, regulatory, and donor requirements</p></div>
+        <div class="icard rb"><h4 style="font-size:14px;color:var(--blk)">Performance Monitoring</h4><p>Tracking organizational and program performance</p></div>
+      </div>
+    </div>
+    <div class="blk">
+      <h2>Institutional Controls and Assurance</h2>
+      <p>Make Aid Possible maintains strong internal systems to ensure accountability and integrity, including:</p>
+      <ul><li>Structured financial oversight and transparent reporting processes</li><li>Internal controls to safeguard resources and ensure compliance</li><li>Monitoring and evaluation systems to track outcomes and performance</li><li>Integrated risk management processes across operations</li></ul>
+      <p>We maintain a clear separation between governance and management, ensuring independent oversight and accountability. Our core organizational policies — including procurement, safeguarding, ethical conduct, and risk management — are aligned with international best practices.</p>
+    </div>
+    <div class="blk">
+      <h2>Governance Principles</h2>
+      <p>Our governance is guided by the following principles:</p>
+      <ul><li>Transparency and Accountability</li><li>Ethical Leadership and Integrity</li><li>Responsible Resource Management</li><li>Compliance with Legal and Regulatory Frameworks</li><li>Commitment to Institutional Excellence</li></ul>
+    </div>
+    <div class="blk">
+      <h2>Institutional Strength</h2>
+      <p>This governance framework enables Make Aid Possible to operate effectively across multiple regions, including complex and high-risk environments, while maintaining consistent standards of quality, oversight, and accountability. It ensures that all programs are delivered with integrity, transparency, and alignment with both local and international standards.</p>
+      <div style="background:var(--g50);border-radius:14px;padding:20px;margin-top:16px;border-left:4px solid var(--red)"><p style="font-size:14px;color:var(--txm);margin:0">Make Aid Possible maintains a comprehensive governance framework that ensures independent oversight, financial accountability, risk management, and full alignment with international donor and regulatory standards, enabling the responsible delivery of scalable and sustainable programs.</p></div>
+    </div>
+    <div class="blk">
+      <h2>Leadership</h2>
+      <a class="brp" onclick="openModal()">View Leadership</a>
+    </div>
+    <div class="blk">
+      <h2>Policies</h2>
+      <p>Make Aid Possible is committed to the highest standards of accountability, transparency, and ethical conduct across all areas of work. Our policies provide the framework for responsible decision-making, risk management, and the delivery of high-quality, sustainable programs across regions.</p>
+      <h3 style="margin-top:16px">Our Policy Framework</h3>
+      <p>Our operations are guided by a comprehensive set of policies aligned with international standards and best practices, ensuring compliance with regulatory requirements and donor expectations.</p>
+      <div class="apcard"><h4>Procurement Policy</h4><p>Ensures fair, transparent, and competitive procurement processes, promoting value for money and responsible resource management.</p></div>
+      <div class="apcard"><h4>Safeguarding Policy</h4><p>Protects the rights, dignity, and safety of all individuals, particularly vulnerable populations — zero-tolerance approach to abuse and exploitation.</p></div>
+      <div class="apcard"><h4>Code of Conduct</h4><p>Establishes clear standards of professional and ethical behavior for all staff, partners, and representatives.</p></div>
+      <div class="apcard"><h4>Anti-Fraud and Anti-Corruption Policy</h4><p>Prevents, detects, and addresses fraud, corruption, and misuse of resources, ensuring integrity across all operations.</p></div>
+      <div class="apcard"><h4>Risk Management Policy</h4><p>Provides a structured approach to identifying, assessing, and mitigating risks across programs and operations.</p></div>
+      <div class="apcard"><h4>Data Protection and Privacy Policy</h4><p>Ensures the responsible collection, use, and protection of personal and organizational data in line with applicable regulations.</p></div>
+      <div class="apcard"><h4>Financial Management Policy</h4><p>Establishes standards for budgeting, financial control, reporting, and accountability.</p></div>
+      <div class="apcard"><h4>Commitment to Compliance</h4><p>Make Aid Possible ensures that all policies are regularly reviewed and updated, aligned with international donor requirements, and integrated across all programs and operations.</p></div>
+      <p style="font-size:14px;color:var(--txm);margin-top:12px">Detailed policy documents are available upon request or through designated organizational channels.</p>
+    </div>
+    <div class="brow2"><a class="br" onclick="openModal()">Contact Us</a><a class="bgr" onclick="go('getinvolved')">Partner With Us</a></div>
+  </div>
+  <div id="ftr-governance"></div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     INSIGHTS
+══════════════════════════════════════════ -->
+<div id="pg-insights" class="pg">
+  <div class="pghero">
+    <div class="pghero-bg" style="background-image:url('https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=900&q=80')"></div>
+    <div class="pghero-ov"></div>
+    <div class="sl">Insights</div>
+    <h1>Driven by Data. Strengthening Local Knowledge.</h1>
+    <p>Contributing to advancing knowledge and practice in humanitarian and development work through data, research, and strategic learning.</p>
+  </div>
+  <div class="inn">
+    <div class="blk">
+      <h2>Insights</h2>
+      <p>Make Aid Possible contributes to advancing knowledge and practice in humanitarian and development work through data, research, and strategic learning. Through our programs and partnerships, we generate insights that inform decision-making, strengthen systems, and support sustainable development outcomes across regions.</p>
+    </div>
+    <div class="blk">
+      <h2>Data-Driven Approach</h2>
+      <div class="datacard"><div class="di"><svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg></div><div><h3>Evidence Into Action</h3><p>We integrate data and evidence into all stages of program design, implementation, and evaluation. This ensures that interventions are grounded in real-world contexts, continuously improved, and aligned with best practices in development and humanitarian response.</p></div></div>
+    </div>
+    <div class="blk">
+      <h2>Research and Collaboration</h2>
+      <div class="datacard"><div class="di"><svg viewBox="0 0 24 24"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg></div><div><h3>Academic &amp; Knowledge Partnerships</h3><p>Make Aid Possible collaborates with academic institutions, researchers, and knowledge partners to support data collection, field-based research, and analysis. Through these collaborations, local institutions and researchers are empowered to lead, publish, and contribute to knowledge production, strengthening localization and institutional capacity.</p></div></div>
+    </div>
+    <div class="blk">
+      <h2>Learning and Continuous Improvement</h2>
+      <p>Insights generated through our programs are used to refine approaches, improve outcomes, and adapt to evolving needs across regions. We prioritize continuous learning, ensuring that knowledge is translated into more effective, scalable, and sustainable interventions.</p>
+    </div>
+    <div class="blk">
+      <h2>Knowledge Areas</h2>
+      <p>Make Aid Possible contributes to knowledge and dialogue across key areas, including:</p>
+      <div class="pgrid">
+        <div class="pcard"><div class="pico"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z" fill="white"/></svg></div><h4>Sustainable Development</h4><p>Long-term, systems-level approaches to development challenges</p></div>
+        <div class="pcard"><div class="pico"><svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2z" fill="white"/></svg></div><h4>Systems Strengthening</h4><p>How institutions and services can be built to last</p></div>
+        <div class="pcard"><div class="pico"><svg viewBox="0 0 24 24"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3z" fill="white"/></svg></div><h4>Community Resilience</h4><p>Building capacity to withstand and recover from shocks</p></div>
+        <div class="pcard"><div class="pico"><svg viewBox="0 0 24 24"><path d="M12 3L1 9l11 6 9-4.91V17h2V9L12 3z" fill="white"/></svg></div><h4>Evidence-Based Programming</h4><p>Applying research to design more effective interventions</p></div>
+      </div>
+      <p style="font-size:14px;color:var(--txm);margin-top:8px">These insights support partners, stakeholders, and institutions in advancing more effective and coordinated development solutions.</p>
+    </div>
+    <div class="blk">
+      <h2>Looking Ahead</h2>
+      <p>Make Aid Possible is committed to strengthening its role in knowledge generation and thought leadership, ensuring that data, research, and learning continue to inform impactful and sustainable development work.</p>
+      <div class="brow2"><a class="br" onclick="go('getinvolved')">Partner With Us</a><a class="bgr" onclick="openModal()">Contact Us</a></div>
+    </div>
+  </div>
+  <div id="ftr-insights"></div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     GET INVOLVED
+══════════════════════════════════════════ -->
+<div id="pg-getinvolved" class="pg">
+  <div class="pghero">
+    <div class="pghero-bg" style="background-image:url('https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?w=900&q=80')"></div>
+    <div class="pghero-ov"></div>
+    <div class="sl">Get Involved</div>
+    <h1>Be Part of the Change</h1>
+    <p>Individuals, institutions, and partners — take part in advancing sustainable, high-impact development solutions across regions.</p>
+  </div>
+  <div class="inn">
+    <div class="blk">
+      <h2>Get Involved</h2>
+      <p>Make Aid Possible invites individuals, institutions, and partners to take part in advancing sustainable, high-impact development solutions across regions. Through collaboration, support, and engagement, you can contribute to delivering evidence-based, systems-level impact that creates lasting change for communities worldwide.</p>
+    </div>
+    <div class="blk">
+      <h2>Ways to Get Involved</h2>
+
+      <div class="ccard">
+        <div class="cimg"><img src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=700&q=80" alt="Partner"><div class="cov"><div class="clbl">Partner With Us</div></div></div>
+        <div class="cbody"><h3>Partner With Us</h3><p>Work with us to design and deliver high-impact, scalable programs across sectors and regions. We collaborate with governments, international organizations, private sector partners, and institutions to implement solutions that are sustainable, measurable, and aligned with development priorities.</p><a class="brb" onclick="openModal()">Start a Conversation</a></div>
+      </div>
+      <div class="ccard">
+        <div class="cimg"><img src="https://images.unsplash.com/photo-1509099836639-18ba1795216d?w=700&q=80" alt="Support"><div class="cov"><div class="clbl">Support Our Work</div></div></div>
+        <div class="cbody"><h3>Support Our Work</h3><p>Contribute to expanding our programs and reaching more communities through financial support. Your contribution enables the delivery of critical interventions across education, health, economic empowerment, and climate and sustainability.</p><a class="brb" onclick="openModal()">Donate Now</a></div>
+      </div>
+      <div class="ccard">
+        <div class="cimg"><img src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?w=700&q=80" alt="Collaborate"><div class="cov"><div class="clbl">Collaborate With Us</div></div></div>
+        <div class="cbody"><h3>Collaborate With Us</h3><p>Engage as a strategic or operational partner to co-create and implement programs that respond to local needs and drive long-term impact. We work with organizations and experts who share our commitment to innovation and sustainable development.</p><a class="brb" onclick="openModal()">Get in Touch</a></div>
+      </div>
+      <div class="ccard">
+        <div class="cimg"><img src="https://images.unsplash.com/photo-1616587226157-48e49175ee20?w=700&q=80" alt="Volunteer"><div class="cov"><div class="clbl">Volunteer &amp; Engage</div></div></div>
+        <div class="cbody"><h3>Volunteer and Engage</h3><p>Support our work through knowledge sharing, technical expertise, and community engagement. We welcome individuals and professionals committed to contributing to meaningful, sustainable impact.</p><a class="brb" onclick="openModal()">Express Your Interest</a></div>
+      </div>
+    </div>
+    <div class="blk">
+      <h2>Why Get Involved</h2>
+      <p>By working with Make Aid Possible, you contribute to:</p>
+      <ul><li>Sustainable, long-term development solutions</li><li>Evidence-based and systems-level impact</li><li>Programs that prioritize quality over quantity</li><li>Initiatives that strengthen communities and systems</li></ul>
+    </div>
+    <div class="blk">
+      <h2>Global Engagement</h2>
+      <p>Make Aid Possible operates across the Middle East and Africa, with extended reach in Europe and conflict-affected environments, and strategic engagement in Canada. This global presence enables partners and supporters to contribute to impactful work across diverse regions and contexts.</p>
+    </div>
+
+    <div class="qblk">
+      <p>"The example of those who spend their wealth in the way of Allah is like a seed that grows seven ears; in every ear is a hundred grains."</p>
+      <cite>— Qur'an 2:261</cite>
+    </div>
+
+    <div class="blk">
+      <h2>Take Action</h2>
+      <p>Be part of a growing network of partners and supporters working to deliver sustainable development solutions at scale.</p>
+      <div class="brow2"><a class="br" onclick="openModal()">Partner With Us</a><a class="bgr" onclick="openModal('Donor / Funding')">Donate</a><a class="bgr" onclick="openModal()">Collaborate With Us</a><a class="bgr" onclick="openModal()">Contact Us</a></div>
+    </div>
+  </div>
+  <div id="ftr-getinvolved"></div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     CONTACT
+══════════════════════════════════════════ -->
+<div id="pg-contact" class="pg">
+  <div class="pghero">
+    <div class="pghero-bg" style="background-image:url('https://images.unsplash.com/photo-1423666639041-f56000c27a9a?w=900&q=80')"></div>
+    <div class="pghero-ov"></div>
+    <div class="sl">Contact</div>
+    <h1>Contact Us</h1>
+    <p>We welcome inquiries from partners, donors, institutions, and individuals interested in working with Make Aid Possible.</p>
+  </div>
+  <div class="inn">
+    <div class="blk">
+      <h2>Get in Touch</h2>
+      <p>For all inquiries, including partnerships, collaboration, and general information, please contact us through the following:</p>
+      <div style="margin:16px 0">
+        <div class="fci" style="color:var(--tx)"><svg viewBox="0 0 24 24" style="width:16px;height:16px;fill:var(--red);flex-shrink:0;margin-top:1px"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg><a href="mailto:info@mapcan.ca" style="color:var(--tx)">info@mapcan.ca</a></div>
+        <div class="fci" style="color:var(--tx)"><svg viewBox="0 0 24 24" style="width:16px;height:16px;fill:var(--red);flex-shrink:0;margin-top:1px"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/></svg><a href="https://www.mapcan.ca" target="_blank" style="color:var(--tx)">www.mapcan.ca</a></div>
+      </div>
+      <p>Make Aid Possible operates through a centralized communication model. All inquiries received through this email address are reviewed and directed to the appropriate office or team.</p>
+    </div>
+    <div class="blk">
+      <h2>Connect With Us</h2>
+      <p>Stay connected and follow our work, updates, and impact across regions:</p>
+      <div class="socs" style="margin-top:16px">
+        <a href="https://www.linkedin.com/company/mapcanada" class="soc" target="_blank"><svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg></a>
+        <a href="https://www.instagram.com/map_canada" class="soc" target="_blank"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" fill="none" stroke="white" stroke-width="2"/><circle cx="12" cy="12" r="4" fill="none" stroke="white" stroke-width="2"/><circle cx="17.5" cy="6.5" r="1" fill="white"/></svg></a>
+        <a href="https://www.facebook.com/people/MAP-Canada/61577343145781" class="soc" target="_blank"><svg viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg></a>
+      </div>
+    </div>
+    <div class="blk">
+      <h2>Our Presence Across 22 Countries</h2>
+      <p>Make Aid Possible operates across 22 countries with direct program implementation and extends its reach to more than 62 countries through trusted local partners.</p>
+    </div>
+    <div class="blk">
+      <h2>Our Offices</h2>
+      <div class="igrid">
+        <div class="icard rb">
+          <h4 style="font-size:15px;color:var(--blk)">Canada</h4>
+          <p><strong>Head Office — Global HQ</strong><br>The Canada office serves as the global headquarters, leading overall strategy, governance, partnerships, and institutional engagement.</p>
+        </div>
+        <div class="icard rb">
+          <h4 style="font-size:15px;color:var(--blk)">Jordan</h4>
+          <p><strong>Regional Hub — Middle East &amp; Africa</strong><br>The Jordan office oversees program implementation, regional operations, and coordination across countries.</p>
+        </div>
+      </div>
+      <p style="font-size:14px;color:var(--txm);margin-top:8px">All office-related inquiries are managed centrally. Please contact us via the email above, and your request will be directed to the appropriate office.</p>
+    </div>
+  </div>
+
+  <!-- CONTACT FORM -->
+  <div class="frm">
+    <h2>Send Us a Message</h2>
+    <div class="fg"><label class="fl" for="cN">Full Name <em>*</em></label><input class="fi" type="text" id="cN" placeholder="Your full name"></div>
+    <div class="fg"><label class="fl" for="cO">Organization <span style="color:var(--g500);font-weight:400">(optional)</span></label><input class="fi" type="text" id="cO" placeholder="Your organization"></div>
+    <div class="fg"><label class="fl" for="cE">Email Address <em>*</em></label><input class="fi" type="email" id="cE" placeholder="your@email.com"></div>
+    <div class="fg">
+      <label class="fl" for="cT">Inquiry Type <em>*</em></label>
+      <select class="fsel" id="cT">
+        <option value="">Select inquiry type</option>
+        <option>Partnership / Collaboration</option>
+        <option>Donor / Funding</option>
+        <option>Volunteer / Engagement</option>
+        <option>General Inquiry</option>
+      </select>
+    </div>
+    <div class="fg"><label class="fl" for="cS">Subject <em>*</em></label><input class="fi" type="text" id="cS" placeholder="Subject of your message"></div>
+    <div class="fg"><label class="fl" for="cM">Message <em>*</em></label><textarea class="fta" id="cM" placeholder="Write your message here..."></textarea></div>
+    <button class="fsub" onclick="submitContactPage()">Submit Message</button>
+  </div>
+
+  <section class="dcta">
+    <div class="dcta-bg" style="background-image:url('https://images.unsplash.com/photo-1547471080-7cc2caa01a7e?w=900&q=80')"></div>
+    <div class="dcta-ov"></div>
+    <h2>Start a Conversation</h2>
+    <p>We welcome opportunities to collaborate and co-create solutions that deliver meaningful impact.</p>
+    <div class="ctarow">
+      <a class="bw" onclick="go('getinvolved')">Partner With Us</a>
+      <a class="brow" onclick="go('partnerships')">Collaborate With Us</a>
+    </div>
+  </section>
+  <div id="ftr-contact"></div>
+</div>
+
+<script>
+// ── PAGE SYSTEM ─────────────────────────────────
+const PAGES = ['home','about','ourwork','where','impact','partnerships','governance','insights','getinvolved','contact'];
+
+function go(id) {
+  PAGES.forEach(p => {
+    const el = document.getElementById('pg-' + p);
+    if (el) el.classList.toggle('active', p === id);
+  });
+  window.scrollTo({top:0,behavior:'smooth'});
+  if (id !== 'home') {
+    const slot = document.getElementById('ftr-' + id);
+    if (slot && !slot.dataset.done) { slot.innerHTML = mkFooter(id); slot.dataset.done = '1'; }
+  }
+}
+
+function mkFooter(id) {
+  const uid = id + Date.now();
+  return `<footer class="ftr">
+    <div class="ftr-logo">
+      <div class="logo-mark" style="width:50px;height:50px"><svg viewBox="0 0 32 32"><path d="M16 3C8.8 3 3 8.8 3 16s5.8 13 13 13 13-5.8 13-13S23.2 3 16 3zm0 23c-5.5 0-10-4.5-10-10S10.5 6 16 6c1.9 0 3.6.5 5.1 1.4C17.5 9.3 15 12.5 15 16.3c0 3.8 2.5 7 6.1 8.3C19.6 25.5 17.9 26 16 26z"/></svg></div>
+      <div class="ftr-ltext">Make Aid<br>Possible</div>
+    </div>
+    <div class="socs">
+      <a href="https://www.linkedin.com/company/mapcanada" class="soc" target="_blank"><svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg></a>
+      <a href="https://www.instagram.com/map_canada" class="soc" target="_blank"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" fill="none" stroke="white" stroke-width="2"/><circle cx="12" cy="12" r="4" fill="none" stroke="white" stroke-width="2"/><circle cx="17.5" cy="6.5" r="1" fill="white"/></svg></a>
+      <a href="https://www.facebook.com/people/MAP-Canada/61577343145781" class="soc" target="_blank"><svg viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg></a>
+    </div>
+    <p>Make Aid Possible is a Canadian-based humanitarian and development organization delivering evidence-based, systems-level solutions across the Middle East, Africa, and Europe.</p>
+    <div class="ftr-contact" style="margin:16px 0">
+      <div class="fci"><svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>info@mapcan.ca</div>
+      <div class="fci"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/></svg>www.mapcan.ca</div>
+    </div>
+    <div class="facc" onclick="tgl(this)">Quick Links <span>+</span></div>
+    <div class="facc-b"><a onclick="go('home')">Home</a> | <a onclick="go('about')">About</a> | <a onclick="go('ourwork')">Our Work</a> | <a onclick="go('where')">Where We Work</a> | <a onclick="go('impact')">Impact</a> | <a onclick="go('partnerships')">Partnerships</a> | <a onclick="go('governance')">Governance</a> | <a onclick="go('insights')">Insights</a> | <a onclick="go('getinvolved')">Get Involved</a> | <a onclick="go('contact');closeNav()">Contact</a></div>
+    <div class="facc" onclick="tgl(this)">Our Programs <span>+</span></div>
+    <div class="facc-b"><a onclick="go('ourwork')">Education</a> | <a onclick="go('ourwork')">Health</a> | <a onclick="go('ourwork')">Economic Empowerment &amp; Inclusion</a> | <a onclick="go('ourwork')">Climate &amp; Sustainability</a></div>
+    <div class="fsub2">
+      <div class="fsub2-l">Email Address<em>*</em></div>
+      <input class="fein" type="email" id="fe-${uid}" placeholder="your@email.com">
+      <button class="fsb" onclick="sub('fe-${uid}')">Subscribe</button>
+    </div>
+    <div class="fcopy">© 2026 Make Aid Possible | All Rights Reserved · www.mapcan.ca</div>
+  </footer>`;
+}
+
+// ── NAV ──────────────────────────────────────────
+function openNav() { document.getElementById('nav').classList.add('open'); document.body.style.overflow = 'hidden'; }
+function closeNav() { document.getElementById('nav').classList.remove('open'); document.body.style.overflow = ''; }
+
+// ── ACCORDION ────────────────────────────────────
+function tgl(el) {
+  const b = el.nextElementSibling;
+  const s = el.querySelector('span');
+  if (!b) return;
+  const open = b.style.display === 'block';
+  b.style.display = open ? 'none' : 'block';
+  s.textContent = open ? '+' : '−';
+}
+
+// ── YOUTUBE ──────────────────────────────────────
+function loadYT(id, src) {
+  const w = document.getElementById(id);
+  if (!w) return;
+  w.innerHTML = `<iframe src="${src}" allowfullscreen allow="autoplay; encrypted-media"></iframe>`;
+}
+
+// ── SUBSCRIBE ────────────────────────────────────
+function sub(id) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  const v = el.value.trim();
+  if (!v || !v.includes('@')) { toast('Please enter a valid email address.', '#b91c1c'); return; }
+  toast('Thank you! We\'ll be in touch. ✓', '#166534');
+  el.value = '';
+}
+
+// ── CONTACT FORM ─────────────────────────────────
+function submitForm() {
+  const n = document.getElementById('cN').value.trim();
+  const e = document.getElementById('cE').value.trim();
+  const t = document.getElementById('cT').value;
+  const s = document.getElementById('cS').value.trim();
+  const m = document.getElementById('cM').value.trim();
+  if (!n || !e || !t || !s || !m) { toast('Please fill in all required fields.', '#b91c1c'); return; }
+  if (!e.includes('@')) { toast('Please enter a valid email.', '#b91c1c'); return; }
+  toast('Message sent! We\'ll be in touch soon. ✓', '#166534');
+  ['cN','cO','cE','cS','cM'].forEach(i => { const el = document.getElementById(i); if (el) el.value = ''; });
+  document.getElementById('cT').value = '';
+}
+
+// ── TOAST ────────────────────────────────────────
+function toast(msg, bg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg; t.style.background = bg || '#166534';
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 3500);
+}
+
+function openModal(type) {
+  document.getElementById('contactModal').classList.add('open');
+  document.body.style.overflow = 'hidden';
+  if (type) {
+    const sel = document.getElementById('mT');
+    if (sel) sel.value = type;
+  }
+}
+function closeModal() {
+  document.getElementById('contactModal').classList.remove('open');
+  document.body.style.overflow = '';
+}
+function submitModal() {
+  const n = document.getElementById('mN').value.trim();
+  const e = document.getElementById('mE').value.trim();
+  const t = document.getElementById('mT').value;
+  const s = document.getElementById('mS').value.trim();
+  const m = document.getElementById('mM').value.trim();
+  const o = document.getElementById('mO').value.trim();
+  if (!n || !e || !t || !s || !m) { toast('Please fill in all required fields.', '#b91c1c'); return; }
+  if (!e.includes('@')) { toast('Please enter a valid email.', '#b91c1c'); return; }
+  const body = encodeURIComponent(
+    'Name: ' + n + '\n' +
+    (o ? 'Organization: ' + o + '\n' : '') +
+    'Email: ' + e + '\n' +
+    'Inquiry Type: ' + t + '\n' +
+    'Subject: ' + s + '\n\n' +
+    'Message:\n' + m
+  );
+  const mailtoLink = 'mailto:info@mapcan.ca?subject=' + encodeURIComponent('[MAP Inquiry] ' + s) + '&body=' + body;
+  window.location.href = mailtoLink;
+  toast('Opening your email app... ✓', '#166534');
+  setTimeout(() => {
+    closeModal();
+    ['mN','mO','mE','mS','mM'].forEach(i => { const el = document.getElementById(i); if(el) el.value=''; });
+    document.getElementById('mT').value = '';
+  }, 1200);
+}
+
+function submitContactPage() {
+  const n = document.getElementById('cN').value.trim();
+  const e = document.getElementById('cE').value.trim();
+  const t = document.getElementById('cT').value;
+  const s = document.getElementById('cS').value.trim();
+  const m = document.getElementById('cM').value.trim();
+  const o = document.getElementById('cO').value.trim();
+  if (!n || !e || !t || !s || !m) { toast('Please fill in all required fields.', '#b91c1c'); return; }
+  if (!e.includes('@')) { toast('Please enter a valid email.', '#b91c1c'); return; }
+  const body = encodeURIComponent(
+    'Name: ' + n + '\n' +
+    (o ? 'Organization: ' + o + '\n' : '') +
+    'Email: ' + e + '\n' +
+    'Inquiry Type: ' + t + '\n' +
+    'Subject: ' + s + '\n\n' +
+    'Message:\n' + m
+  );
+  window.location.href = 'mailto:info@mapcan.ca?subject=' + encodeURIComponent('[MAP Inquiry] ' + s) + '&body=' + body;
+  toast('Opening your email app... ✓', '#166534');
+}
+</script>
+
+<!-- CONTACT MODAL -->
+<div class="modal-bg" id="contactModal" onclick="if(event.target===this)closeModal()">
+  <div class="modal-box">
+    <div class="modal-handle"></div>
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <h2>Send Us a Message</h2>
+    <p class="sub">We'll get back to you as soon as possible.</p>
+    <div class="fg"><label class="fl" for="mN">Full Name <em>*</em></label><input class="fi" type="text" id="mN" placeholder="Your full name"></div>
+    <div class="fg"><label class="fl" for="mO">Organization <span style="color:var(--g500);font-weight:400">(optional)</span></label><input class="fi" type="text" id="mO" placeholder="Your organization"></div>
+    <div class="fg"><label class="fl" for="mE">Email Address <em>*</em></label><input class="fi" type="email" id="mE" placeholder="your@email.com"></div>
+    <div class="fg">
+      <label class="fl" for="mT">Inquiry Type <em>*</em></label>
+      <select class="fsel" id="mT">
+        <option value="">Select inquiry type</option>
+        <option>Partnership / Collaboration</option>
+        <option>Donor / Funding</option>
+        <option>Volunteer / Engagement</option>
+        <option>General Inquiry</option>
+      </select>
+    </div>
+    <div class="fg"><label class="fl" for="mS">Subject <em>*</em></label><input class="fi" type="text" id="mS" placeholder="Subject of your message"></div>
+    <div class="fg"><label class="fl" for="mM">Message <em>*</em></label><textarea class="fta" id="mM" placeholder="Write your message here..."></textarea></div>
+    <button class="fsub" onclick="submitModal()">Send via Email</button>
+  </div>
+</div>
+</body>
+</html>
